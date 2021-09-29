@@ -53,6 +53,7 @@ src_install() {
     fperms -R 755 /opt/apps/net.winegame.client/files/bin/*
     fperms -R 755 /opt/apps/net.winegame.client/files/share/lutris/bin/*
 }
+
 pkg_postinst() {
     xdg_desktop_database_update
     xdg_icon_cache_update
