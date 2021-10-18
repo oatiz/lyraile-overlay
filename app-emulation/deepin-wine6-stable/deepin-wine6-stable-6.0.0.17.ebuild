@@ -8,6 +8,11 @@ inherit unpacker
 DESCRIPTION="Deepin wine6 stable(AMD64)"
 HOMEPAGE="https://www.deepin.org"
 
+COMMON_URI="https://github.com/oatiz/lyraile-overlay/releases/download/tempfile"
+SRC_URI="${COMMON_URI}/${PN}_${PV}-1_amd64.deb
+         ${COMMON_URI}/${PN}-i386_${PV}-1_i386.deb
+         ${COMMON_URI}/${PN}-amd64_${PV}-1_amd64.deb
+"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -16,9 +21,6 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-#app-emulation/${PN}-i386
-#app-emulation/${PN}-amd64
-# libudev0-shim // TODO
 RDEPEND="${DEPEND}
 	app-emulation/vkd3d[abi_x86_32]
 	media-libs/openal[abi_x86_32]
@@ -47,12 +49,6 @@ RDEPEND="${DEPEND}
 	media-libs/alsa-lib[abi_x86_32]"
 
 S=${WORKDIR}
-
-src_unpack() {
-	unpack_deb ${FILESDIR}/${PN}_${PV}-1_amd64.deb
-	unpack_deb ${FILESDIR}/${PN}-i386_${PV}-1_i386.deb
-	unpack_deb ${FILESDIR}/${PN}-amd64_${PV}-1_amd64.deb
-}
 
 src_install() {
 	insinto /

@@ -8,6 +8,8 @@ inherit unpacker
 DESCRIPTION="Deepin Version of Wine"
 HOMEPAGE="https://www.deepin.org"
 
+COMMON_URI="https://github.com/oatiz/lyraile-overlay/releases/download/tempfile"
+SRC_URI="${COMMON_URI}/${PN}_${PV}-1_i386.deb"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -19,10 +21,6 @@ RDEPEND="${DEPEND}
 	app-emulation/deepin-wine5"
 
 S=${WORKDIR}
-
-src_unpack() {
-	unpack_deb ${FILESDIR}/${PN}_${PV}-1_i386.deb
-}
 
 src_install() {
 	insinto /

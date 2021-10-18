@@ -15,7 +15,7 @@ HOMEPAGE="https://tim.qq.com/"
 
 _MIRROR="https://cdn-package-store6.deepin.com"
 SRC_URI="${_MIRROR}/appstore/pool/appstore/c/${DEB_PN}/${DEB_PN}_${DP_TIM_VER}_i386.deb
-		https://dldir1.qq.com/qqfile/qq/PCTIM/TIM3.3.8/TIM${PV}.exe
+		https://dldir1.qq.com/qqfile/qq/PCTIM/TIM${PV}/TIM${PV}.exe
 "
 
 LICENSE="Tencent"
