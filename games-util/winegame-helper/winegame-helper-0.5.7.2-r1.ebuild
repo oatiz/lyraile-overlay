@@ -50,8 +50,8 @@ src_install() {
     insinto /
     doins -r usr opt
 
-    fperms -R 755 /opt/apps/net.winegame.client/files/bin/*
-    fperms -R 755 /opt/apps/net.winegame.client/files/share/lutris/bin/*
+    fperms -R 755 /opt/apps/net.winegame.client/files/bin
+    fperms -R 755 /opt/apps/net.winegame.client/files/share/lutris/bin
 }
 
 pkg_postinst() {
