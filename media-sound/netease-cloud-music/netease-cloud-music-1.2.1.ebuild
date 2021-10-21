@@ -21,6 +21,7 @@ RDEPEND="${DEPEND}
     media-video/vlc
     net-dns/avahi
     sys-auth/nss-mdns
+    net-libs/libgssglue
 "
 S="${WORKDIR}"
 
