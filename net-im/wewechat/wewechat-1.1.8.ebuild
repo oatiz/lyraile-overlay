@@ -14,22 +14,43 @@ RESTRICT="strip mirror"
 LICENSE="MIT"
 KEYWORDS="~amd64 ~x86"
 
+IUSE="guise"
+
 DEPEND=""
 RDEPEND="${DEPEND}
+    x11-libs/gtk+
+    x11-libs/libXScrnSaver
+    dev-libs/nss
     gnome-base/gconf
     dev-libs/libappindicator
     x11-libs/libnotify
-	x11-libs/libXScrnSaver
     x11-libs/libXtst
+    guise? (
+        sys-apps/bubblewrap
+        sys-apps/lsb-release
+    )
 "
 BDEPEND=""
+
 
 S="${WORKDIR}"
 
 src_install() {
-	doins -r usr opt
+    if use guise; then
+        sed -i '4c Exec=/usr/bin/'${PN}' %U' ${S}/usr/share/applications/${PN}.desktop
+    fi
 
+	doins -r usr opt
 	fperms 0755 /opt/${PN}/${PN}
+
+    if use guise; then
+       insinto /opt/${PN}
+       doins ${FILESDIR}/uos-lsb ${FILESDIR}/uos-release
+
+       exeinto /usr/bin
+       exeopts -m0755
+       doexe ${FILESDIR}/${PN}
+    fi
 }
 
 pkg_postinst() {

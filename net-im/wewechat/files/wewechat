@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+bwrap --dev-bind / / \
+      --bind /opt/wewechat/uos-release /etc/os-release \
+      --bind /opt/wewechat/uos-lsb /etc/lsb-release \
+      /opt/wewechat/wewechat
