@@ -1,0 +1,26 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+AC_PIDFILE="/run/auto-cpufreq.pid"
+AC_LOG="/var/log/auto-cpufreq.log"
+
+depend() {
+        after net
+}
+
+start() {
+        ebegin "Starting auto-cpufreq, Log File: ${AC_LOG}"
+        start-stop-daemon --start --background \
+                --make-pidfile --pidfile "${AC_PIDFILE}" \
+                --env IS_SERVICE=1 \
+                --exec /usr/bin/auto-cpufreq -- --daemon
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping auto-cpufreq"
+        start-stop-daemon --stop \
+                --pidfile "${AC_PIDFILE}"
+        eend $?
+}
