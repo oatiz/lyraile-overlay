@@ -27,6 +27,7 @@ RDEPEND="${DEPEND}
     app-arch/p7zip
     x11-apps/xwininfo
     media-fonts/wqy-microhei
+    media-fonts/noto-cjk
     app-emulation/deepin-wine6-stable
     app-emulation/deepin-wine-helper"
 
