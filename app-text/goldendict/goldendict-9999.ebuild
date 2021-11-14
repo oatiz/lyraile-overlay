@@ -53,24 +53,26 @@ src_prepare() {
 
 	# disable git
 	sed -i -e '/git describe/s/^/#/' ${PN}.pro || die
-
 	# fix installation path
 	sed -i -e '/PREFIX = /s:/usr/local:/usr:' ${PN}.pro || die
+	# fix flags
+	echo "QMAKE_CXXFLAGS_RELEASE = ${CFLAGS}" >> goldendict.pro
+	echo "QMAKE_CFLAGS_RELEASE = ${CXXFLAGS}" >> goldendict.pro
 
 	# add trailing semicolon
-	sed -i -e '/^Categories/s/$/;/' redist/${PN}.desktop || die
+	sed -i -e '/^Categories/s/$/;/' redist/org.goldendict.GoldenDict.desktop || die
 }
 
 src_configure() {
 	local myconf=()
 	use ffmpeg || myconf+=( DISABLE_INTERNAL_PLAYER=1 )
 
-	eqmake5 "${myconf[@]}"
+	eqmake5 "${myconf[@]}" PREFIX="/usr" goldendict.pro
 }
 
 src_install() {
 	dobin ${PN}
-	domenu redist/${PN}.desktop
+	domenu redist/org.goldendict.GoldenDict.desktop
 	doicon redist/icons/${PN}.png
 
 	insinto /usr/share/apps/${PN}/locale
@@ -79,4 +81,3 @@ src_install() {
 	insinto /usr/share/${PN}/help
 	doins help/*.qch
 }
-

@@ -13,7 +13,6 @@
 @@ -632,5 +633,3 @@
  TS_OUT ~= s/.ts/.qm/g
  PRE_TARGETDEPS += $$TS_OUT
- 
+
 -include( qtsingleapplication/src/qtsingleapplication.pri )
 -
-
