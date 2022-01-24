@@ -1,0 +1,96 @@
+From 7c19d3c66758747d854c63e4c34ef127ce201fa6 Mon Sep 17 00:00:00 2001
+From: sickcodes <info@sick.codes>
+Date: Sun, 28 Nov 2021 23:36:59 +0000
+Subject: [PATCH] 5.10-lts compatibility
+
+---
+ binder/binder.c | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+
+diff --git a/binder/binder.c b/binder/binder.c
+index 1b97cfc..d468dbd 100644
+--- a/binder/binder.c
++++ b/binder/binder.c
+@@ -2445,11 +2445,11 @@ static int binder_translate_binder(struct flat_binder_object *fp,
+ 		ret = -EINVAL;
+ 		goto done;
+ 	}
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
++// #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
+ 	if (security_binder_transfer_binder(proc->cred, target_proc->cred)) {
+-#else
+-	if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+-#endif
++// #else
++// 	if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
++// #endif
+ 		ret = -EPERM;
+ 		goto done;
+ 	}
+@@ -2495,11 +2495,11 @@ static int binder_translate_handle(struct flat_binder_object *fp,
+ 				  proc->pid, thread->pid, fp->handle);
+ 		return -EINVAL;
+ 	}
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
++// #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
+ 	if (security_binder_transfer_binder(proc->cred, target_proc->cred)) {
+-#else
+-	if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
+-#endif
++// #else
++// 	if (security_binder_transfer_binder(proc->tsk, target_proc->tsk)) {
++// #endif
+ 		ret = -EPERM;
+ 		goto done;
+ 	}
+@@ -2587,11 +2587,11 @@ static int binder_translate_fd(u32 fd, binder_size_t fd_offset,
+ 		ret = -EBADF;
+ 		goto err_fget;
+ 	}
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
++// #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
+ 	ret = security_binder_transfer_file(proc->cred, target_proc->cred, file);
+-#else
+-	ret = security_binder_transfer_file(proc->tsk, target_proc->tsk, file);
+-#endif
++// #else
++// 	ret = security_binder_transfer_file(proc->tsk, target_proc->tsk, file);
++// #endif
+ 	if (ret < 0) {
+ 		ret = -EPERM;
+ 		goto err_security;
+@@ -2989,13 +2989,13 @@ static void binder_transaction(struct binder_proc *proc,
+ 			return_error_line = __LINE__;
+ 			goto err_invalid_target_handle;
+ 		}
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
++// #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
+ 		if (security_binder_transaction(proc->cred,
+ 						target_proc->cred) < 0) {
+-#else
+-		if (security_binder_transaction(proc->tsk,
+-						target_proc->tsk) < 0) {
+-#endif
++// #else
++// 		if (security_binder_transaction(proc->tsk,
++// 						target_proc->tsk) < 0) {
++// #endif
+ 			return_error = BR_FAILED_REPLY;
+ 			return_error_param = -EPERM;
+ 			return_error_line = __LINE__;
+@@ -4937,11 +4937,11 @@ static int binder_ioctl_set_ctx_mgr(struct file *filp,
+ 		ret = -EBUSY;
+ 		goto out;
+ 	}
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
++// #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,15,2))
+ 	ret = security_binder_set_context_mgr(proc->cred);
+-#else
+-	ret = security_binder_set_context_mgr(proc->tsk);
+-#endif
++// #else
++// 	ret = security_binder_set_context_mgr(proc->tsk);
++// #endif
+ 	if (ret < 0)
+ 		goto out;
+ 	if (uid_valid(context->binder_context_mgr_uid)) {
