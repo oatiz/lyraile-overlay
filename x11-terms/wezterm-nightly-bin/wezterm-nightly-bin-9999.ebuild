@@ -1,15 +1,15 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit desktop eutils xdg
+inherit unpacker desktop xdg
 
 MY_PN="${PN/-bin/}"
 
 DESCRIPTION="Bleeding edge builds of a GPU-accelerated cross-platform terminal emulator and multiplexer implemented in Rust"
 HOMEPAGE="https://wezfurlong.org/wezterm"
-SRC_URI="https://github.com/wez/wezterm/releases/download/nightly/${MY_PN}.Ubuntu16.04.tar.xz"
+SRC_URI="https://github.com/wez/wezterm/releases/download/nightly/${MY_PN}.Ubuntu20.04.deb"
 
 LICENSE="MIT"
 SLOT="0"
@@ -31,7 +31,7 @@ S="${WORKDIR}"
 
 src_install() {
     insinto /
-    doins -r wezterm/etc wezterm/usr
+    doins -r etc usr
 
     fperms 755 /usr/bin/strip-ansi-escapes
     fperms 755 /usr/bin/wezterm
@@ -39,12 +39,3 @@ src_install() {
     fperms 755 /usr/bin/wezterm-mux-server
 }
 
-pkg_postinst() {
-    xdg_desktop_database_update
-    xdg_icon_cache_update
-}
-
-pkg_postrm() {
-    xdg_desktop_database_update
-    xdg_icon_cache_update
-}
