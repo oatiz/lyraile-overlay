@@ -1,0 +1,28 @@
+diff --git a/lib/Graph/Easy.pm b/lib/Graph/Easy.pm
+index 0ae40fd..b67bacc 100644
+--- a/lib/Graph/Easy.pm
++++ b/lib/Graph/Easy.pm
+@@ -1570,7 +1570,9 @@ sub as_ascii
+   # select 'ascii' characters
+   $self->{_ascii_style} = 0;
+
+-  $self->_as_ascii(@_);
++  my $asc = $self->_as_ascii(@_);
++  $asc =~ s/(\x{FFFF})//g;
++  $asc;
+   }
+
+ sub _as_ascii
+diff --git a/lib/Graph/Easy/Node.pm b/lib/Graph/Easy/Node.pm
+index b58f538..6d7d7c7 100644
+--- a/lib/Graph/Easy/Node.pm
++++ b/lib/Graph/Easy/Node.pm
+@@ -1503,5 +1503,8 @@ sub label
+
+   $label = $self->_un_escape($label) if !$_[0] && $label =~ /\\[EGHNT]/;
+
++  # placeholder for han chars
++  $label =~ s/([\x{4E00}-\x{9FFF}])/$1\x{FFFF}/g;
++
+   $label;
+   }
