@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+# Copyright 1999-2022 Gentoo Authors
+
+description="Power Profiles daemon"
+command="/usr/libexec/power-profiles-daemon"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+supervisor=supervise-daemon
+#Uncomment this to enable debug
+#supervise_daemon_args="-e G_MESSAGES_DEBUG=all"
+
+depend() {
+        after logger modules
+}
