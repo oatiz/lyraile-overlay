@@ -1,13 +1,12 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{8..10} )
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{9,10} )
+inherit distutils-r1
 
-DISTUTILS_USE_SETUPTOOLS=rdepend
-
-inherit distutils-r1 systemd
 
 DESCRIPTION="Automatic CPU speed & power optimizer for Linux"
 HOMEPAGE="https://github.com/AdnanHodzic/auto-cpufreq"
@@ -20,7 +19,7 @@ else
 fi
 
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 SLOT="0"
 IUSE=""
 
@@ -30,49 +29,10 @@ RDEPEND="dev-python/psutil
 
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/${P}"
-
 RESTRICT="mirror"
 
 DOCS=( README.md )
 
-src_prepare() {
-	sed -i 's|usr/local|usr|g' "scripts/${PN}.service" source/core.py
-	distutils-r1_src_prepare
-}
-
-python_install() {
-	distutils-r1_python_install
-
-	exeinto "/usr/local/share/${PN}/scripts"
-	doexe scripts/cpufreqctl.sh
-    doinitd ${FILESDIR}/${PN}
-
-	systemd_douserunit "scripts/${PN}.service"
-}
-
-pkg_postinst() {
-	touch /var/log/auto-cpufreq.log
-
-	elog ""
-	elog "Enable auto-cpufreq daemon service at boot:"
-	elog "systemctl enable --now auto-cpufreq"
-	elog ""
-	elog "To view live log, run:"
-	elog "auto-cpufreq --log"
-	elog ""
-}
-
-pkg_postrm() {
-	# Remove auto-cpufreq log file
-	rm /var/log/auto-cpufreq.log
-
-	# Remove auto-cpufreq's cpufreqctl binary
-	# it copies cpufreqctl.sh over (do NOT like this behaviour)
-	rm /usr/bin/cpufreqctl
-
-	# Restore original cpufreqctl binary if backup was made
-	if [ -f "/usr/bin/cpufreqctl.auto-cpufreq.bak" ]; then
-		mv /usr/bin/cpufreqctl.auto-cpufreq.bak /usr/bin/cpufreqctl
-	fi
+python_install_all() {
+	distutils-r1_python_install_all
 }
