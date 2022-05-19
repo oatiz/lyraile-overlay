@@ -1,0 +1,68 @@
+#!/sbin/openrc-run
+# Copyright 2008-2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2 or later
+
+: ${CLASH_CWD:=/opt/clash}
+
+USER=${RC_SVCNAME##*.}
+PIDFILE_DIR=/var/run/clash/${USER}
+PIDFILE=${PIDFILE_DIR}/clash.pid
+CLASH_LOG_DIR="/var/log/clash/${USER}"
+CLASH_LOG_FILE="${CLASH_LOG_DIR}/clash-linux.log"
+
+U_HOME="/home/${USER}"
+U_CONF_DIR="${U_HOME}/.config/clash"
+
+CLASH_OPTS="/usr/bin/clash-linux -d ${U_CONF_DIR}"
+
+description="Clash service daemon."
+
+depend() {
+    need localmount
+    after network-online nftables iptabels
+}
+
+checkconfig() {
+    if [ "${RC_VERSION:-0}" = "0" ]; then
+        eerror "This script cannot be used for baselayout-1."
+        return 1
+    fi
+
+    if [ "${USER}" = "${RC_SVCNAME}" ]; then
+	eerror "You have to create an init script for each user:"
+	eerror "ln -s clash /etc/init.d/clash.<user>"
+	return 1
+    fi
+
+    if ! id -u "${USER}" >/dev/null; then
+	eerror "${USER}: No such user"
+	return 1
+    fi
+
+    checkpath -d --owner 0 --mode 0755 "${PIDFILE_DIR%/*}"
+    checkpath -d --owner "${USER}" --mode 0755 "${PIDFILE_DIR}"
+
+    checkpath -d --owner 0 --mode 0755 "${CLASH_LOG_DIR%/*}"
+    checkpath -d --owner "${USER}" --mode 0755 "${CLASH_LOG_DIR}"
+}
+
+start_pre() {
+    ${CLASH_CWD}/setup-cgroup.sh
+    checkconfig || return $?
+}
+
+start() {
+    ebegin "Starting clash daemon for user ${USER}"
+    start-stop-daemon --start --background \
+        --stdout "${CLASH_LOG_FILE}" --stderr "${CLASH_LOG_FILE}" \
+	--make-pidfile --pidfile "${PIDFILE}" \
+	--chdir "${U_HOME}" \
+	--exec /usr/bin/bypass-proxy -- ${CLASH_OPTS}
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping clash daemon for user ${USER}"
+        start-stop-daemon --stop --pidfile "${PIDFILE}"
+    eend $?
+}
