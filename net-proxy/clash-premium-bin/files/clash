@@ -13,7 +13,6 @@ CLASH_LOG_FILE="${CLASH_LOG_DIR}/clash-linux.log"
 U_HOME="/home/${USER}"
 U_CONF_DIR="${U_HOME}/.config/clash"
 
-CLASH_OPTS="/usr/bin/clash-linux -d ${U_CONF_DIR}"
 
 description="Clash service daemon."
 
@@ -29,14 +28,19 @@ checkconfig() {
     fi
 
     if [ "${USER}" = "${RC_SVCNAME}" ]; then
-	eerror "You have to create an init script for each user:"
-	eerror "ln -s clash /etc/init.d/clash.<user>"
-	return 1
+        eerror "You have to create an init script for each user:"
+	    eerror "ln -s clash /etc/init.d/clash.<user>"
+	    return 1
     fi
 
     if ! id -u "${USER}" >/dev/null; then
-	eerror "${USER}: No such user"
-	return 1
+        eerror "${USER}: No such user"
+        return 1
+    fi
+
+    if [ ! -f "${U_CONF_DIR}/config.yaml" ]; then
+        eerror "No such config file: ${U_CONF_DIR}/config.yaml"
+        return 1
     fi
 
     checkpath -d --owner 0 --mode 0755 "${PIDFILE_DIR%/*}"
@@ -47,17 +51,35 @@ checkconfig() {
 }
 
 start_pre() {
-    ${CLASH_CWD}/setup-cgroup.sh
     checkconfig || return $?
 }
 
 start() {
     ebegin "Starting clash daemon for user ${USER}"
-    start-stop-daemon --start --background \
-        --stdout "${CLASH_LOG_FILE}" --stderr "${CLASH_LOG_FILE}" \
-	--make-pidfile --pidfile "${PIDFILE}" \
-	--chdir "${U_HOME}" \
-	--exec /usr/bin/bypass-proxy -- ${CLASH_OPTS}
+
+    local clash_opts=""
+    local enable_tun=$(yq .tun.enable ${U_CONF_DIR}/config.yaml)
+
+    if [ "${enable_tun}" == "true" ] ; then
+       clash_opts="/usr/bin/clash-linux -d ${U_CONF_DIR}"
+
+       sh ${CLASH_CWD}/setup-cgroup.sh > /dev/null
+
+       start-stop-daemon --start --background \
+            --pidfile "${PIDFILE}" --make-pidfile  \
+            --stdout "${CLASH_LOG_FILE}" --stderr "${CLASH_LOG_FILE}" \
+            --chdir "${U_HOME}" \
+            --exec /usr/bin/bypass-proxy -- ${clash_opts}
+    else
+       clash_opts="-d ${U_CONF_DIR}"
+
+       start-stop-daemon --start --background \
+            --pidfile "${PIDFILE}" --make-pidfile  \
+            --stdout "${CLASH_LOG_FILE}" --stderr "${CLASH_LOG_FILE}" \
+            --chdir "${U_HOME}" \
+            --exec /usr/bin/clash-linux -- ${clash_opts}
+    fi
+
     eend $?
 }
 

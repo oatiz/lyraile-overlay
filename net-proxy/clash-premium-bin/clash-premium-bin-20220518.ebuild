@@ -5,16 +5,24 @@ EAPI=8
 
 inherit unpacker udev
 
-MY_P="clash-linux-amd64-2022.05.18"
+MY_PN="clash-linux"
+# convert "yyyyMMdd" to "yyyy.MM.dd"
+MY_PV="${PV:0:4}.${PV:4:2}.${PV:(-2)}"
 
 DESCRIPTION="A rule-based tunnel in Go."
 HOMEPAGE="https://github.com/Dreamacro/clash"
-SRC_URI="https://github.com/Dreamacro/clash/releases/download/premium/${MY_P}.gz"
+COMMON_URI="https://release.dreamacro.workers.dev"
+SRC_URI="
+	v1? ( ${COMMON_URI}/${MY_PV}/${MY_PN}-amd64-${MY_PV}.gz )
+	v3? ( ${COMMON_URI}/${MY_PV}/${MY_PN}-amd64-v3-${MY_PV}.gz )"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+geoip"
+IUSE="+geoip +v1 v3"
+REQUIRED_USE="
+	v1? ( !v3 )
+	|| ( v1 v3 )"
 
 RESTRICT="mirror"
 
@@ -23,12 +31,17 @@ QA_PREBUILT="*"
 
 RDEPEND="
 	virtual/udev
+	app-misc/yq
 	geoip? ( net-misc/geoipupdate )"
 
 S="${WORKDIR}"
 
 src_configure() {
-	mv "${S}/${MY_P}" "${S}/clash-linux"
+	if use v1 ; then
+		mv "${S}/${MY_PN}-amd64-${MY_PV}" "${S}/${MY_PN}" || die
+	elif use v3 ; then
+		mv "${S}/${MY_PN}-amd64-v3-${MY_PV}" "${S}/${MY_PN}" || die
+	fi
 }
 
 src_install() {
