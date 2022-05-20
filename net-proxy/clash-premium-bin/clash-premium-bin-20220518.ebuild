@@ -45,16 +45,18 @@ src_configure() {
 }
 
 src_install() {
+	local des="/usr/share/clash"
+	insinto ${des}
+	doins ${FILESDIR}/clash-default ${FILESDIR}/config.template.yaml
+	doins "${FILESDIR}/"{setup-cgroup,setup-tun,clean-tun}.sh "${FILESDIR}/bypass-proxy"{,-pid}
+	fperms 0755 "${des}/"{setup-cgroup,setup-tun,clean-tun}.sh "${des}/bypass-proxy"{,-pid}
+
 	udev_dorules ${FILESDIR}/99-clash.rules
-
-	insinto /opt/clash
-	doins ${FILESDIR}/clash-default "${FILESDIR}/"{setup-cgroup,setup-tun,clean-tun}.sh
-	fperms 0755 "/opt/clash/"{setup-cgroup,setup-tun,clean-tun}.sh
-
 	doinitd ${FILESDIR}/clash
-	dobin clash-linux "${FILESDIR}/bypass-proxy"{,-pid}
+	dobin clash-linux
 }
 
 pkg_postinst() {
 	ewarn "To use TUN mode, net-firewall/nftables is required."
+	ewarn "     See: /usr/share/clash/config.template.yaml    "
 }

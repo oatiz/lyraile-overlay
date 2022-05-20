@@ -1,5 +1,5 @@
 #!/bin/bash
 
-bypass-proxy-pid $$ 2>&1 > /dev/null
+/usr/share/clash/bypass-proxy-pid $$ 2>&1 > /dev/null
 
 exec "$@"

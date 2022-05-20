@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /opt/clash/clash-default
+. /usr/share/clash/clash-default
 
 function assert() {
     if ! "$@"; then

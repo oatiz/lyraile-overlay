@@ -2,7 +2,7 @@
 # Copyright 2008-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2 or later
 
-: ${CLASH_CWD:=/opt/clash}
+: ${CLASH_CWD:=/usr/share/clash}
 
 USER=${RC_SVCNAME##*.}
 PIDFILE_DIR=/var/run/clash/${USER}
@@ -69,7 +69,7 @@ start() {
             --pidfile "${PIDFILE}" --make-pidfile  \
             --stdout "${CLASH_LOG_FILE}" --stderr "${CLASH_LOG_FILE}" \
             --chdir "${U_HOME}" \
-            --exec /usr/bin/bypass-proxy -- ${clash_opts}
+            --exec ${CLASH_CWD}/bypass-proxy -- ${clash_opts}
     else
        clash_opts="-d ${U_CONF_DIR}"
 

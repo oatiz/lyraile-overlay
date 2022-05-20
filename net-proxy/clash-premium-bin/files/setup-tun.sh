@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /opt/clash/clash-default
+. /usr/share/clash/clash-default
 
 ip route replace default dev utun table "$IPROUTE2_TABLE_ID"
 
@@ -8,7 +8,6 @@ ip rule del fwmark "$NETFILTER_MARK" lookup "$IPROUTE2_TABLE_ID" > /dev/null 2> 
 ip rule add fwmark "$NETFILTER_MARK" lookup "$IPROUTE2_TABLE_ID"
 
 nft -f - << EOF
-define LOCAL_SUBNET = {127.0.0.0/8, 224.0.0.0/4, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12}
 table clash
 flush table clash
 table clash {
@@ -18,7 +17,7 @@ table clash {
         ip protocol != { tcp, udp } accept
 
         meta cgroup $BYPASS_CGROUP_CLASSID accept
-        ip daddr \$LOCAL_SUBNET accept
+        ip daddr $LOCAL_SUBNET accept
 
         ct state new ct mark set $NETFILTER_MARK
         ct mark $NETFILTER_MARK mark set $NETFILTER_MARK
@@ -30,7 +29,7 @@ table clash {
         ip protocol != { tcp, udp } accept
 
         iif utun accept
-        ip daddr \$LOCAL_SUBNET accept
+        ip daddr $LOCAL_SUBNET accept
 
         mark set $NETFILTER_MARK
     }
