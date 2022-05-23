@@ -18,7 +18,7 @@ description="Clash service daemon."
 
 depend() {
     need localmount
-    after network-online nftables iptabels
+    after network-online nftables iptabels local
 }
 
 checkconfig() {

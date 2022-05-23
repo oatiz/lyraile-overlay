@@ -9,7 +9,6 @@ _PN="asusd"
 
 DESCRIPTION="${PN} (${_PN}) is a utility for Linux to control many aspects of various ASUS laptops."
 HOMEPAGE="https://asus-linux.org"
-SRC_HASH="4a77bbf891328ce57d7104ab98ce17eb"
 SRC_URI="
 	https://gitlab.com/asus-linux/${PN}/-/archive/${PV}/${PN}-${PV}.tar.gz
 	https://vendors.retarded.farm/${PN}/vendor-${PV}.tar.xz -> vendor_${PN}-${PV}.tar.xz
@@ -18,8 +17,10 @@ SRC_URI="
 LICENSE="MPL-2.0"
 SLOT="0/4"
 KEYWORDS="~amd64"
-IUSE="+acpi +gfx gnome notify systemd"
+IUSE="+acpi +gfx +systemd gnome notify"
 REQUIRED_USE="gnome? ( gfx )"
+
+RESTRICT="mirror"
 
 RDEPEND="!!sys-power/rog-core
 	!!sys-power/asus-nb-ctrl
@@ -39,10 +40,8 @@ DEPEND="${RDEPEND}
 	systemd? ( sys-apps/systemd:0= )
 	sys-apps/dbus
 "
-
+PATCHES=("${FILESDIR}/${P}-fancurve_fix.patch")
 S="${WORKDIR}/${PN}-${PV}"
-
-RESTRICT="mirror"
 
 src_unpack() {
 	unpack ${PN}-${PV}.tar.gz
@@ -88,7 +87,7 @@ src_install() {
 	doins data/icons/scalable/*.svg
 
 	insinto /lib/udev/rules.d/
-	doins data/${_PN}.rules
+	doins ${FILESDIR}/*.rules
 
 	if [ -f data/_asusctl ] && [ -d /usr/share/zsh/site-functions ]; then
 		insinto /usr/share/zsh/site-functions
@@ -103,9 +102,9 @@ src_install() {
 		systemd_douserunit data/${_PN}-user.service
 		use notify && systemd_douserunit data/asus-notify.service
 	else
-		doinitd ${FILESDIR}/${_PN}
-		doinitd ${FILESDIR}/${_PN}-user
-		use notify && doinitd ${FILESDIR}/asus-notify
+		doinitd ${FILESDIR}/openrc/${_PN}
+		doinitd ${FILESDIR}/openrc/${_PN}-user
+		use notify && doinitd ${FILESDIR}/openrc/asus-notify
 	fi
 
 	if use acpi; then
@@ -113,7 +112,12 @@ src_install() {
 		doins ${FILESDIR}/90-acpi_call.conf
 	fi
 
-	default
+	# animes (apps)
+	insinto /usr/share/${_PN}
+	doins -r rog-anime/data/anime
+
+	# binary
+	dobin "target/release/asus"{d,d-user,ctl,-notify}
 }
 
 pkg_postinst() {

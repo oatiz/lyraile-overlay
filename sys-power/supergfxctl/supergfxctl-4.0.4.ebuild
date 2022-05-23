@@ -18,7 +18,9 @@ SRC_URI="
 LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="gnome systemd"
+IUSE="gnome +systemd"
+
+RESTRICT="mirror"
 
 BDEPEND="!!<=sys-power/asusctl-4.0.0"
 RDEPEND="
@@ -26,11 +28,11 @@ RDEPEND="
 		x11-apps/xrandr
 		gnome-base/gdm
 	)
+	systemd? ( sys-apps/systemd:0= )
 "
 DEPEND="${BDEPEND}
 	${RDEPEND}
 	>=virtual/rust-1.51.0
-	systemd? ( sys-apps/systemd:0= )
 	sys-apps/dbus
 "
 
@@ -101,12 +103,12 @@ Possible locations are ~/.xinitrc, /etc/sddm/Xsetup, etc.\n"
 
 	if use systemd ; then
 		systemd_dounit data/${_PN}.service
-	else
-		doinitd ${FILESDIR}/${_PN}
-	fi
 
-	ins into /usr/lib/systemd/user-preset/
-	doins data/${_PN}.preset
+		ins into /usr/lib/systemd/user-preset/
+		doins data/${_PN}.preset
+	else
+		doinitd ${FILESDIR}/openrc/${_PN}
+	fi
 
 	default
 }

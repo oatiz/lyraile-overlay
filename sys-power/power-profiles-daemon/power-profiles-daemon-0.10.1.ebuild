@@ -15,6 +15,8 @@ IUSE="doc +systemd"
 
 KEYWORDS="~amd64"
 
+RESTRICT="mirror"
+
 BDEPEND=">=dev-libs/libgudev-234
 	>=sys-auth/polkit-0.114
 	sys-power/upower
@@ -37,7 +39,7 @@ src_install() {
 	if use systemd ; then
 		systemd_enable_service multi-user.target ${PN}.service
 	else
-		doinitd ${FILESDIR}/${PN}
+		doinitd ${FILESDIR}/openrc/${PN}
 	fi
 }
 

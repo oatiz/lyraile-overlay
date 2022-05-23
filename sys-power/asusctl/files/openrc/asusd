@@ -1,0 +1,22 @@
+#!/sbin/openrc-run
+# Copyright 1999-2022 Gentoo Authors
+
+description="Asusctl Daemon"
+
+command="/usr/bin/asusd"
+command_background=true
+start_stop_daemon_args="-e IS_SERVICE=1"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="/var/log/asuslinux/${RC_SVCNAME}.log"
+
+depend() {
+    need dbus
+    after local
+    use supergfxd power-profiles-daemon
+}
+
+start_pre() {
+    checkpath -q -d "/run/asuslinux"
+    checkpath -q -d "/var/log/asuslinux"
+}

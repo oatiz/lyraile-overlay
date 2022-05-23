@@ -2,12 +2,17 @@
 # Copyright 1999-2022 Gentoo Authors
 
 description="Supergfx Daemon"
+
 command="/usr/bin/supergfxd"
 command_background=true
-pidfile="/run/${RC_SVCNAME}.pid"
-supervisor=supervise-daemon
-supervise_daemon_args="-e IS_SUPERGFX_SERVICE=1"
+
+pidfile="/run/asuslinux/${RC_SVCNAME}.pid"
 
 depend() {
-        after logger modules
+    need dbus
+    after local
+}
+
+start_pre() {
+    checkpath -q -d "/run/asuslinux"
 }
