@@ -1,0 +1,21 @@
+* lyraile-overlay
+Lyraile's personal Gentoo overlay for testing.
+
+For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENTOO-ZH OVERLAY]] instead.
+** Available packages
+| Package Name                    | Available Version | Additional Information                             |
+|---------------------------------+-------------------+----------------------------------------------------|
+| app-emulation/bochs             |             2.7.0 | Converted from [[https://archlinux.org/packages/community/x86_64/bochs][ArchLinux-bochs]]                     |
+| app-text/goldendict             |              9999 | Copied from [[https://github.com/gentoo/qt][qt-overlay]]                             |
+| dev-db/tableplus-bin            |           0.1.186 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                      |
+| dev-perl/Graph-Easy             |           0.760.0 | Patched chinese.patch                              |
+| media-sound/mpdris2             |              9999 |                                                    |
+| media-sound/pamxier             |               1.4 |                                                    |
+| net-proxy/clash-premium-bin     |          20220518 | For openrc user. TODO: tun-mode                    |
+| sys-kernel/rog-xanmod-hybrid    |     5.14.3,5.15.1 | Deprecated                                         |
+| sys-power/asusctl               |          4.0.7-r2 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
+| sys-power/power-profiles-daemon |            0.10.1 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
+| sys-power/supergfxctl           |             4.0.4 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
+| sys-power/auto-cpufreq          |              9999 |                                                    |
+| x11-misc/clipmenu               |             6.2.0 |                                                    |
+| x11-misc/polybar-dwm-module     |             3.5.2 |                                                    |

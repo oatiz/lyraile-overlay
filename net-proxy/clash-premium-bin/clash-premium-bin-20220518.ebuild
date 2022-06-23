@@ -31,7 +31,7 @@ QA_PREBUILT="*"
 
 RDEPEND="
 	virtual/udev
-	app-misc/yq
+	app-misc/yq-bin
 	geoip? ( net-misc/geoipupdate )"
 
 S="${WORKDIR}"
