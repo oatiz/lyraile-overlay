@@ -16,6 +16,6 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | sys-power/asusctl               |          4.0.7-r2 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
 | sys-power/power-profiles-daemon |            0.10.1 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
 | sys-power/supergfxctl           |             4.0.4 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
-| sys-power/auto-cpufreq          |              9999 |                                                    |
+| sys-power/auto-cpufreq          |             1.9.4 |                                                    |
 | x11-misc/clipmenu               |             6.2.0 |                                                    |
 | x11-misc/polybar-dwm-module     |             3.5.2 |                                                    |

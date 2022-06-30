@@ -1,26 +1,23 @@
 #!/sbin/openrc-run
-# Copyright 1999-2020 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2022 Gentoo Authors
 
-AC_PIDFILE="/run/auto-cpufreq.pid"
-AC_LOG="/var/log/auto-cpufreq.log"
+description="auto-cpufreq - Automatic CPU speed & power optimizer for Linux"
+
+supervisor="supervise-daemon"
+
+command="auto-cpufreq"
+command_background=true
+command_args="--daemon"
+command_user="root"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="/var/log/${RC_SVCNAME}/${RC_SVCNAME}.log"
 
 depend() {
-        after net
+    after net local
 }
 
-start() {
-        ebegin "Starting auto-cpufreq, Log File: ${AC_LOG}"
-        start-stop-daemon --start --background \
-                --make-pidfile --pidfile "${AC_PIDFILE}" \
-                --env IS_SERVICE=1 \
-                --exec /usr/bin/auto-cpufreq -- --daemon
-        eend $?
-}
-
-stop() {
-        ebegin "Stopping auto-cpufreq"
-        start-stop-daemon --stop \
-                --pidfile "${AC_PIDFILE}"
-        eend $?
+start_pre() {
+    checkpath -q -d "/var/log/${RC_SVCNAME}"
+    checkpath -f --owner "${USER}" --mode 0755 "${output_log}"
 }

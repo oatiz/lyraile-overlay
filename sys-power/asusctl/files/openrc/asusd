@@ -19,4 +19,5 @@ depend() {
 start_pre() {
     checkpath -q -d "/run/asuslinux"
     checkpath -q -d "/var/log/asuslinux"
+    checkpath -f --owner "${USER}" --mode 0755 "${output_log}"
 }
