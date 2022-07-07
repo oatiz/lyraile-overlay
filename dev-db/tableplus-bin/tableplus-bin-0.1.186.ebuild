@@ -28,9 +28,6 @@ RDEPEND="
 	${DEPEND}
 "
 
-RDEPEND="
-"
-
 S="${WORKDIR}"
 QA_PREBUILT="*"
 
