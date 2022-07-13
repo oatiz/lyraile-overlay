@@ -18,6 +18,8 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 BDEPEND=">=dev-libs/libgudev-234
+	dev-python/python-dbusmock
+	dev-util/umockdev
 	>=sys-auth/polkit-0.114
 	sys-power/upower
 "

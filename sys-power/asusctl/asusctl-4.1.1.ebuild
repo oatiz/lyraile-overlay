@@ -40,7 +40,6 @@ DEPEND="${RDEPEND}
 	systemd? ( sys-apps/systemd:0= )
 	sys-apps/dbus
 "
-PATCHES=("${FILESDIR}/${P}-fancurve_fix.patch")
 S="${WORKDIR}/${PN}-${PV}"
 
 src_unpack() {
