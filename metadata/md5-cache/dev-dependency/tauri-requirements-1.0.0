@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=Tauri System Dependencies
+EAPI=8
+HOMEPAGE=https://tauri.app/v1/guides/getting-started/prerequisites#setting-up-linux
+KEYWORDS=-* ~amd64
+LICENSE=custom
+RDEPEND=net-libs/webkit-gtk x11-misc/appmenu-gtk-module x11-libs/gtk+:3 dev-libs/libappindicator:3 gnome-base/librsvg media-libs/vips
+RESTRICT=mirror
+SLOT=0
+_md5_=9644b3aaa4e5c60a8816e803ac646bc8

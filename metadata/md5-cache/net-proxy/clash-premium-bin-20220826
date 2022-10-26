@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=configure install postinst unpack
+DESCRIPTION=A rule-based tunnel in Go.
+EAPI=8
+HOMEPAGE=https://github.com/Dreamacro/clash
+INHERIT=unpacker udev
+IUSE=+geoip +v1 v3
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=virtual/udev app-misc/yq-bin geoip? ( net-misc/geoipupdate )
+REQUIRED_USE=v1? ( !v3 ) || ( v1 v3 )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=v1? ( https://release.dreamacro.workers.dev/2022.08.26/clash-linux-amd64-2022.08.26.gz ) v3? ( https://release.dreamacro.workers.dev/2022.08.26/clash-linux-amd64-v3-2022.08.26.gz )
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	unpacker	bc57272a0491765c71d973c8cfd35063	udev	eec0bbab06977f1cfc5597269c1fa152
+_md5_=382d26ef050937dac56ecbbf197fa3e8
