@@ -1,0 +1,27 @@
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source."https://github.com/Relm4/Relm4.git"]
+git = "https://github.com/Relm4/Relm4.git"
+rev = "968d09c9417dce6f84446948523e3befc4954d50"
+replace-with = "vendored-sources"
+
+[source."https://github.com/gtk-rs/gtk-rs-core"]
+git = "https://github.com/gtk-rs/gtk-rs-core"
+replace-with = "vendored-sources"
+
+[source."https://github.com/gtk-rs/gtk4-rs"]
+git = "https://github.com/gtk-rs/gtk4-rs"
+replace-with = "vendored-sources"
+
+[source."https://github.com/lz1998/ricq.git"]
+git = "https://github.com/lz1998/ricq.git"
+rev = "38fff7007cb51bc39acc30087c3f042031a38eda"
+replace-with = "vendored-sources"
+
+[source."https://gitlab.gnome.org/World/Rust/libadwaita-rs"]
+git = "https://gitlab.gnome.org/World/Rust/libadwaita-rs"
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
