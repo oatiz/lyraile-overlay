@@ -7,18 +7,22 @@ EAPI=8
 
 CRATES="vendor"
 
+REAL_V="d20335607a55a5e8e62c8c6d5023ef87e429f431"
+
 inherit cargo meson xdg desktop
 
-DESCRIPTION="gtk-qq"
-HOMEPAGE="homepage field in Cargo.toml inaccessible to cargo metadata"
+DESCRIPTION="Unofficial Linux QQ client, based on GTK4 and libadwaita."
+HOMEPAGE="https://github.com/lomirus/gtk-qq"
 
+COMMON_URI="https://github.com/oatiz/lyraile-overlay/releases/download/vendor_pkg"
 SRC_URI="
-	https://github.com/lomirus/gtk-qq/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/oatiz/lyraile-overlay/releases/download/vendor_pkg/vendor_${PN}_${PV}.tar.gz
+	https://github.com/lomirus/${PN}/archive/${REAL_V}.tar.gz -> ${P}.tar.gz
+	${COMMON_URI}/vendor_${P}.tar.gz
+	${COMMON_URI}/${PN}.png
 "
 RESTRICT="mirror"
 
-LICENSE="(Apache-2.0 0BSD AGPL-3.0 Apache-2.0 Apache-2.0 WITH LLVM-exception BSD-3-Clause BSL-1.0 MIT MIT) MPL-2.0 Unlicense Zlib"
+LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 IUSE=""
@@ -35,24 +39,23 @@ RDEPEND="
 	gui-libs/libadwaita
 "
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/${PN}-${REAL_V}"
 
 src_prepare() {
 	# adding vendor package config
-	mkdir -p ${S}/.cargo && cp ${FILESDIR}/vendor_config ${S}/.cargo/config
-	mv ${WORKDIR}/vendor ${S}/vendor
+	mkdir -p "${S}"/.cargo && cp "${FILESDIR}"/vendor_config "${S}"/.cargo/config
+	mv "${WORKDIR}"/vendor "${S}"/vendor
 
 	default
 }
 
 BUILD_DIR="builddir"
 src_configure() {
-	meson_src_configure	
+	meson_src_configure
 
 	export CARGO_TARGET_DIR="${S}/target"
 	cargo_src_configure
 }
-
 
 src_compile() {
 	meson_src_compile
@@ -62,7 +65,7 @@ src_compile() {
 
 src_install() {
 	domenu "${FILESDIR}/${PN}".desktop
-	doicon -s 256 "${FILESDIR}/${PN}".png
-	
+	doicon -s 256 "${DISTDIR}/${PN}".png
+
 	dobin "${S}"/target/release/gtk-qq
 }

@@ -2,7 +2,7 @@
 Name=gtk-qq
 Name[zh_CN]=QQ
 Keywords=qq;gtk-qq;
-Exec=gtk-qq
+Exec=/usr/bin/gtk-qq
 Terminal=false
 Type=Application
 Icon=gtk-qq
