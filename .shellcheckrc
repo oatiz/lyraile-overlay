@@ -1,0 +1,2 @@
+# SC2034 (vars set but unused): too many false positives
+disable=SC2034

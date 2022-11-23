@@ -45,9 +45,9 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${PN}-${PV}"
 
 src_unpack() {
-	unpack ${PN}-${PV}.tar.gz
+	unpack "${PN}-${PV}".tar.gz
 	# adding vendor-package
-	cd ${S} && unpack vendor_${PN}_${PV%%_*}.tar.xz
+	cd "${S}" && unpack vendor_"${PN}_${PV%%_*}".tar.xz
 }
 
 src_prepare() {
@@ -62,13 +62,13 @@ src_prepare() {
 	[[ ${k_wrn_touch} != "" ]] && ewarn "\nKernel configuration issue(s), needed for touchpad support:\n\n${k_wrn_touch}"
 
 	# adding vendor package config
-	mkdir -p ${S}/.cargo && cp ${FILESDIR}/${PN}-4.3-vendor_config ${S}/.cargo/config
+	mkdir -p "${S}"/.cargo && cp "${FILESDIR}/${PN}"-4.3-vendor_config "${S}"/.cargo/config
 
 	# fixing wrong relative path in asusctl/Cargo.toml
-	sed -i "s~../../supergfx~../vendor/supergfx~g" ${S}/*/Cargo.toml
+	sed -i "s~../../supergfx~../vendor/supergfx~g" "${S}"/*/Cargo.toml
 
 	# only build rog-control-center when "gui" flag is set
-	! use gui && eapply "${FILESDIR}/${PN}-${PV%%_*}-disable_rog-cc.patch"
+	! use gui && eapply "${FILESDIR}/${PN}-${PV%%_*}"-disable_rog-cc.patch
 
 	default
 }
@@ -91,7 +91,7 @@ src_install() {
 	doins data/icons/scalable/*.svg
 
 	insinto /lib/udev/rules.d/
-	doins ${FILESDIR}/*.rules
+	doins "${FILESDIR}"/*.rules
 
 	if [ -f data/_asusctl ] && [ -d /usr/share/zsh/site-functions ]; then
 		insinto /usr/share/zsh/site-functions
@@ -106,25 +106,25 @@ src_install() {
 		systemd_douserunit data/${_PN}-user.service
 		use notify && systemd_douserunit data/asus-notify.service
 	else
-		doinitd ${FILESDIR}/openrc/${_PN}
-		doinitd ${FILESDIR}/openrc/${_PN}-user
-		use notify && doinitd ${FILESDIR}/openrc/asus-notify
+		doinitd "${FILESDIR}"/openrc/${_PN}
+		doinitd "${FILESDIR}"/openrc/${_PN}-user
+		use notify && doinitd "${FILESDIR}"/openrc/asus-notify
 	fi
 
 	if use acpi; then
 		insinto /etc/modules-load.d
-		doins ${FILESDIR}/90-acpi_call.conf
+		doins "${FILESDIR}"/90-acpi_call.conf
 	fi
 
 	if use gui; then
 		insinto /usr/share/rog-gui/layouts
-        doins rog-aura/data/layouts/*.toml
+		doins rog-aura/data/layouts/*.toml
 
 		insinto /usr/share/icons/hicolor/512x512/apps/
 		doins rog-control-center/data/rog-control-center.png
-        
+
 		domenu rog-control-center/data/rog-control-center.desktop
-	    dobin target/release/rog-control-center
+		dobin target/release/rog-control-center
 	fi
 
 	# animes (apps)
