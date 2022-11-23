@@ -11,10 +11,9 @@ SRC_URI="https://gitlab.freedesktop.org/hadess/${PN}/-/archive/${PV}/${PN}-${PV}
 
 LICENSE="GPL-3+"
 SLOT="0"
-IUSE="doc +systemd"
+IUSE="doc systemd"
 
-KEYWORDS="~amd64"
-
+KEYWORDS="-* ~amd64"
 RESTRICT="mirror"
 
 BDEPEND=">=dev-libs/libgudev-234
@@ -25,10 +24,11 @@ BDEPEND=">=dev-libs/libgudev-234
 "
 DEPEND="${BDEPEND}"
 
-src_configure() {
-	local emesonargs=(
+	src_configure() {
+		local emesonargs=(
 		$(meson_use doc gtk_doc)
 	)
+
 	if use systemd ; then
 		meson_src_configure
 	else
@@ -38,6 +38,7 @@ src_configure() {
 
 src_install() {
 	meson_src_install
+
 	if use systemd ; then
 		systemd_enable_service multi-user.target ${PN}.service
 	else
@@ -47,5 +48,9 @@ src_install() {
 
 pkg_postinst() {
 	ewarn "Don't forget to enable \"${PN}\" service, by runnning:"
-	ewarn "systemctl daemon-reload && systemctl enable --now ${PN}"
+	if use systemd ; then
+		ewarn "systemctl daemon-reload && systemctl enable --now ${PN}"
+	else
+		ewarn "rc-update add power-profiles-daemon && rc-service power-profiles-daemon start"
+	fi
 }

@@ -1,0 +1,10 @@
+[Unit]
+Description=nvidia-powerd service
+
+[Service]
+Type=dbus
+BusName=nvidia.powerd.server
+ExecStart=/usr/bin/nvidia-powerd
+
+[Install]
+WantedBy=multi-user.target

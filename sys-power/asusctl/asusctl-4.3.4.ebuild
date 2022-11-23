@@ -3,7 +3,7 @@
 EAPI=8
 CRATES="vendor"
 
-inherit systemd cargo git-r3 linux-info xdg
+inherit systemd cargo git-r3 linux-info xdg desktop
 
 _PN="asusd"
 
@@ -11,22 +11,24 @@ DESCRIPTION="${PN} (${_PN}) is a utility for Linux to control many aspects of va
 HOMEPAGE="https://asus-linux.org"
 SRC_URI="
 	https://gitlab.com/asus-linux/${PN}/-/archive/${PV}/${PN}-${PV}.tar.gz
-	https://vendors.retarded.farm/${PN}/vendor-${PV}.tar.xz -> vendor_${PN}-${PV}.tar.xz
+	https://vendors.retarded.farm/${PN}/vendor_${PN}_${PV%%_*}.tar.xz
 "
 
 LICENSE="MPL-2.0"
 SLOT="0/4"
-KEYWORDS="~amd64"
-IUSE="+acpi +gfx +systemd gnome notify"
+KEYWORDS="-* ~amd64"
+IUSE="+acpi gfx gnome gui notify systemd"
 REQUIRED_USE="gnome? ( gfx )"
 
 RESTRICT="mirror"
+
 
 RDEPEND="!!sys-power/rog-core
 	!!sys-power/asus-nb-ctrl
 	acpi? ( sys-power/acpi_call )
 	>=sys-power/power-profiles-daemon-0.10.0
 "
+
 DEPEND="${RDEPEND}
 	>=virtual/rust-1.51.0
 	>=sys-devel/llvm-10.0.1
@@ -45,7 +47,7 @@ S="${WORKDIR}/${PN}-${PV}"
 src_unpack() {
 	unpack ${PN}-${PV}.tar.gz
 	# adding vendor-package
-	cd ${S} && unpack vendor_${PN}-${PV}.tar.xz
+	cd ${S} && unpack vendor_${PN}_${PV%%_*}.tar.xz
 }
 
 src_prepare() {
@@ -60,10 +62,13 @@ src_prepare() {
 	[[ ${k_wrn_touch} != "" ]] && ewarn "\nKernel configuration issue(s), needed for touchpad support:\n\n${k_wrn_touch}"
 
 	# adding vendor package config
-	mkdir -p ${S}/.cargo && cp ${FILESDIR}/vendor_config ${S}/.cargo/config
+	mkdir -p ${S}/.cargo && cp ${FILESDIR}/${PN}-4.3-vendor_config ${S}/.cargo/config
 
 	# fixing wrong relative path in asusctl/Cargo.toml
 	sed -i "s~../../supergfx~../vendor/supergfx~g" ${S}/*/Cargo.toml
+
+	# only build rog-control-center when "gui" flag is set
+	! use gui && eapply "${FILESDIR}/${PN}-${PV%%_*}-disable_rog-cc.patch"
 
 	default
 }
@@ -111,21 +116,29 @@ src_install() {
 		doins ${FILESDIR}/90-acpi_call.conf
 	fi
 
+	if use gui; then
+		insinto /usr/share/rog-gui/layouts
+        doins rog-aura/data/layouts/*.toml
+
+		insinto /usr/share/icons/hicolor/512x512/apps/
+		doins rog-control-center/data/rog-control-center.png
+        
+		domenu rog-control-center/data/rog-control-center.desktop
+	    dobin target/release/rog-control-center
+	fi
+
 	# animes (apps)
 	insinto /usr/share/${_PN}
 	doins -r rog-anime/data/anime
 
 	# binary
-	dobin "target/release/asus"{d,d-user,ctl,-notify}
+	dobin "target/release/"{asusd,asusd-user,asusctl,asus-notify}
 }
 
 pkg_postinst() {
-	xdg_icon_cache_update
-	ewarn "Don't forget to reload dbus to enable \"${_PN}\" service, \
-by runnning:\n \`systemctl daemon-reload && systemctl reload dbus &&  \
-udevadm control --reload-rules && udevadm trigger\`\n"
+	udev_reload
 }
 
 pkg_postrm() {
-	xdg_icon_cache_update
+	udev_reload
 }
