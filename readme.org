@@ -8,10 +8,13 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | app-emulation/bochs             |               2.7.0 | Converted from [[https://archlinux.org/packages/community/x86_64/bochs][ArchLinux-bochs]]                     |
 | app-text/goldendict             |                9999 | Copied from [[https://github.com/gentoo/qt][qt-overlay]]                             |
 | dev-db/tableplus-bin            |             0.1.186 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                      |
+| dev-libs/tdlib                  |                 1.8 |                                                    |
 | dev-perl/Graph-Easy             |             0.760.0 | Patched chinese.patch                              |
 | dev-java/oraclejdk-bin          | 1.8.0.351,11.0.16.1 | Support eselect-java                               |
 | media-sound/mpdris2             |                9999 |                                                    |
 | media-sound/pamxier             |                 1.4 |                                                    |
+| media-sound/ytmdesktop          |                9999 |                                                    |
+| media-sound/youtube-music       |               1.0.0 | Pake package                                       |
 | net-im/fluffychat-bin           |               1.6.4 | High CPU usage.(unstable)                          |
 | net-im/gtk-qq                   |               0.2.0 | dev-lang/rust::gentoo ~amd64                       |
 | net-im/schildichat-desktop-bin  |              1.11.8 |                                                    |
