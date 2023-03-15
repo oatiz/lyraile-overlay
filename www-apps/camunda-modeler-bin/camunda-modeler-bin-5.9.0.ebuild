@@ -1,0 +1,64 @@
+# Copyright 2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+inherit unpacker desktop xdg
+
+MY_PN="${PN/-bin/}"
+
+DESCRIPTION="An integrated modeling solution for BPMN, DMN and Forms based on bpmn.io"
+HOMEPAGE="https://github.com/camunda/${MY_PN}"
+SRC_URI="https://github.com/camunda/${MY_PN}/releases/download/v${PV}/${MY_PN}-${PV}-linux-x64.tar.gz"
+
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS="-* ~amd64"
+
+IUSE="+hidpi"
+
+RDEPEND="
+        app-accessibility/at-spi2-core:2
+        app-crypt/libsecret
+        dev-libs/nss
+        x11-misc/xdg-utils
+        x11-libs/gtk+:3
+        x11-libs/libnotify
+        x11-libs/libXtst
+"
+
+RESTRICT="mirror strip"
+
+QA_PREBUILT="
+        chrome-sandbox
+        chrome_crashpad_handler
+        libEGL.so
+        libffmpeg.so
+        libGLESv2.so
+        libvk_swiftshader.so
+        libvulkan.so.1
+        ${MY_PN}
+"
+
+S="${WORKDIR}/${MY_PN}-${PV}-linux-x64"
+
+src_install() {
+        insinto /opt/"${MY_PN}"
+        doins -r *
+
+		newicon -s 128 support/icon_128.png "${MY_PN}".png
+
+		if use hidpi; then
+			make_desktop_entry "/opt/${MY_PN}/${MY_PN} --force-device-scale-factor=2" "Camunda Modeler" "${MY_PN}" "BPMN;IDE;"
+		else
+			make_desktop_entry "/opt/${MY_PN}/${MY_PN}" "Camunda Modeler" "${MY_PN}" "BPMN;IDE;"
+		fi
+
+        local f
+        for f in ${QA_PREBUILT}; do
+			fperms +x "/opt/${MY_PN}/${f}"
+        done
+
+        fperms u+s /opt/"${MY_PN}"/chrome-sandbox
+}
+
