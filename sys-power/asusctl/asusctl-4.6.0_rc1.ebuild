@@ -1,7 +1,15 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 EAPI=8
-CRATES="vendor"
+
+CRATES=$(<"${BASH_SOURCE[0]/${P}*}"/files/${P}.crates)
+SGFX_COMMIT="387e115a0f338662be313627308201405039d116"
+declare -A GIT_CRATES=(
+	[supergfxctl]="https://gitlab.com/asus-linux/supergfxctl;${SGFX_COMMIT}"
+	[eframe]="https://github.com/flukejones/egui;056fd4bd1ed8c48c035e6b75111cfa8087634934;egui-%commit%/crates/eframe"
+	[egui]="https://github.com/flukejones/egui;056fd4bd1ed8c48c035e6b75111cfa8087634934;egui-%commit%/crates/egui"
+	[notify-rust]="https://github.com/flukejones/notify-rust;c83082a2549932bde52a4ec449b9981fc39e9a0d"
+)
 
 inherit systemd cargo git-r3 linux-info xdg desktop
 
@@ -10,18 +18,18 @@ _PN="asusd"
 DESCRIPTION="${PN} (${_PN}) is a utility for Linux to control many aspects of various ASUS laptops."
 HOMEPAGE="https://asus-linux.org"
 SRC_URI="
-	https://gitlab.com/asus-linux/${PN}/-/archive/${PV}/${PN}-${PV}.tar.gz
-	https://vendors.retarded.farm/${PN}/vendor_${PN}_${PV%%_*}.tar.xz
+	https://gitlab.com/asus-linux/${PN}/-/archive/${PV/_/-}/${PN}-${PV/_/-}.tar.gz
+	"$(cargo_crate_uris)"
+	https://gitlab.com/asus-linux/supergfxctl/-/archive/${SGFX_COMMIT}/supergfxctl-${SGFX_COMMIT}.tar.gz -> supergfxctl-${SGFX_COMMIT}.gl.tar.gz
 "
 
-LICENSE="MPL-2.0"
+LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-2 Boost-1.0 ISC LicenseRef-UFL-1.0 MIT MPL-2.0 OFL-1.1 Unicode-DFS-2016 Unlicense ZLIB"
 SLOT="0/4"
 KEYWORDS="-* ~amd64"
 IUSE="+acpi gfx gnome gui notify systemd"
 REQUIRED_USE="gnome? ( gfx )"
 
-RESTRICT="mirror"
-
+RESTRICT="mirror strip"
 
 RDEPEND="!!sys-power/rog-core
 	!!sys-power/asus-nb-ctrl
@@ -42,12 +50,14 @@ DEPEND="${RDEPEND}
 	systemd? ( sys-apps/systemd:0= )
 	sys-apps/dbus
 "
-S="${WORKDIR}/${PN}-${PV}"
+
+PATCHES="${FILESDIR}/${P}_zbus.patch"
+S="${WORKDIR}/${PN}-${PV/_/-}"
 
 src_unpack() {
-	unpack "${PN}-${PV}".tar.gz
-	# adding vendor-package
-	cd "${S}" && unpack vendor_"${PN}_${PV%%_*}".tar.xz
+	cargo_src_unpack
+	unpack ${PN}-${PV/_/-}.tar.gz
+	sed -i "1s/.*/Version=\"${PV}\"/" ${S}/Makefile
 }
 
 src_prepare() {
@@ -61,12 +71,6 @@ src_prepare() {
 	linux_chkconfig_present PINCTRL_AMD || k_wrn_touch="${k_wrn_touch}> CONFIG_PINCTRL_AMD not found, should be either builtin or build as module\n"
 	[[ ${k_wrn_touch} != "" ]] && ewarn "\nKernel configuration issue(s), needed for touchpad support:\n\n${k_wrn_touch}"
 
-	# adding vendor package config
-	mkdir -p "${S}"/.cargo && cp "${FILESDIR}/${PN}"-4.3-vendor_config "${S}"/.cargo/config
-
-	# fixing wrong relative path in asusctl/Cargo.toml
-	sed -i "s~../../supergfx~../vendor/supergfx~g" "${S}"/*/Cargo.toml
-
 	# only build rog-control-center when "gui" flag is set
 	! use gui && eapply "${FILESDIR}/${PN}-${PV%%_*}"-disable_rog-cc.patch
 
@@ -75,13 +79,10 @@ src_prepare() {
 
 src_compile() {
 	cargo_gen_config
-	default
+	cargo_src_compile
 }
 
 src_install() {
-	insinto /etc/${_PN}
-	doins data/${_PN}-ledmodes.toml
-
 	# icons (apps)
 	insinto /usr/share/icons/hicolor/512x512/apps/
 	doins data/icons/*.png
@@ -92,6 +93,10 @@ src_install() {
 
 	insinto /lib/udev/rules.d/
 	doins "${FILESDIR}"/*.rules
+
+	# LED config
+	insinto /usr/share/asusd/
+	doins rog-aura/data/aura_support.ron
 
 	if [ -f data/_asusctl ] && [ -d /usr/share/zsh/site-functions ]; then
 		insinto /usr/share/zsh/site-functions
@@ -117,8 +122,8 @@ src_install() {
 	fi
 
 	if use gui; then
-		insinto /usr/share/rog-gui/layouts
-		doins rog-aura/data/layouts/*.toml
+		insinto /usr/share/rog-gui/layouts/
+		find "${S}/rog-aura/data/layouts" -type f -name "*.ron" -exec doins '{}' + 
 
 		insinto /usr/share/icons/hicolor/512x512/apps/
 		doins rog-control-center/data/rog-control-center.png
@@ -128,11 +133,11 @@ src_install() {
 	fi
 
 	# animes (apps)
-	insinto /usr/share/${_PN}
-	doins -r rog-anime/data/anime
+	insinto /usr/share/asusd/
+	find "rog-anime/data/anime" -type f -exec doins "{}" + 
 
 	# binary
-	dobin "target/release/"{asusd,asusd-user,asusctl,asus-notify}
+	dobin "target/release/"{asusd,asusd-user,asusctl}
 }
 
 pkg_postinst() {
