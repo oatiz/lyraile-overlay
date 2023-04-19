@@ -16,6 +16,7 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | media-sound/pamxier             |                 1.4 |                                                    |
 | media-sound/ytmdesktop          |                9999 |                                                    |
 | media-sound/youtube-music       |               1.0.0 | Pake package                                       |
+| net-im/deepin-wine-wechat       |            3.9.0.28 |                                                    |
 | net-im/fluffychat-bin           |               1.6.4 | High CPU usage.(unstable)                          |
 | net-im/gtk-qq                   |               0.2.0 | dev-lang/rust::gentoo ~amd64                       |
 | net-im/schildichat-desktop-bin  |              1.11.8 |                                                    |
