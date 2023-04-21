@@ -27,5 +27,6 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | sys-power/power-profiles-daemon |                0.12 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc |
 | sys-power/auto-cpufreq          |               1.9.4 |                                                    |
 | www-apps/camunda-modeler-bin    |               5.9.0 |                                                    |
+| x11-misc/envycontrol            |               3.2.0 |                                                    |
 | x11-misc/clipmenu               |               6.2.0 |                                                    |
 | x11-misc/polybar-dwm-module     |               3.5.2 |                                                    |
