@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">Askannz/optimus-manager</remote-id>
+	</upstream>
+	<use>
+		<flag name="openrc">install provided OpenRC service</flag>
+		<flag name="systemd">install provided systemd service</flag>
+		<flag name="sddm">install provided sddm conf</flag>
+		<flag name="gdm">install provided gdm conf</flag>
+		<flag name="lightdm">install provided lightdm conf</flag>
+	</use>
+</pkgmetadata>
+
