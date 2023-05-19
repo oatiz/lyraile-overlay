@@ -10,6 +10,7 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | dev-db/tableplus-bin            |             0.1.186 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                      |
 | dev-libs/tdlib                  |                 1.8 |                                                    |
 | dev-perl/Graph-Easy             |             0.760.0 | Patched chinese.patch                              |
+| dev-python/python-epc           |               0.0.5 | lsp-bridge                                         |
 | dev-java/oraclejdk-bin          | 1.8.0.351,11.0.16.1 | Support eselect-java                               |
 | dev-java/openjdk-bin            |         1.8, 11, 17 | Zulu JDK                                           |
 | media-fonts/lxgw-wenkai-screen  |             1.250.2 |                                                    |
