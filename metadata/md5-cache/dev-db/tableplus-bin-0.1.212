@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst postrm preinst prepare unpack
+DESCRIPTION=Modern, native, and friendly GUI tool for relational databases
+EAPI=8
+HOMEPAGE=https://tableplus.com
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=unpacker desktop wrapper xdg
+KEYWORDS=-* ~amd64
+LICENSE=custom
+RDEPEND=gnome-base/gnome-keyring x11-libs/gtksourceview:3.0 dev-libs/libgee
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://deb.tableplus.com/debian/22/pool/main/t/tableplus/tableplus_0.1.212_amd64.deb http://archive.ubuntu.com/ubuntu/pool/main/c/cyrus-sasl2/libsasl2-2_2.1.28+dfsg-6ubuntu2_amd64.deb http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/libldap-2.5-0_2.5.13+dfsg-1ubuntu1_amd64.deb https://archive.archlinux.org/packages/g/glib2/glib2-2.68.4-1-x86_64.pkg.tar.zst
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	aa6a4e924009232d8b78b31e932c30b5	desktop	021728fdc1b03b36357dbc89489e0f0d	wrapper	4a1902f969e5718126434fc35f3a0d9c	xdg-utils	baea6080dd821f5562d715887954c9d3	xdg	4a14c5c24f121e7da66e5aab4a168c6e
+_md5_=13fca3d1b1fe10953202f13bd52f5686

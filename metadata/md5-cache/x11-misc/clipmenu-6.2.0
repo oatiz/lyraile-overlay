@@ -9,5 +9,5 @@ LICENSE=Unlicense
 RDEPEND=x11-misc/clipnotify
 SLOT=0
 SRC_URI=https://github.com/cdown/clipmenu/archive/6.2.0.tar.gz -> clipmenu-6.2.0.tar.gz
-_eclasses_=toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	5f4bb0758df2e483babf68cd517078ca
+_eclasses_=toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	systemd	5f4bb0758df2e483babf68cd517078ca
 _md5_=693275fbcbc692c3155bb1d54ba562ca
