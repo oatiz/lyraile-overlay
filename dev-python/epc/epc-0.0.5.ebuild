@@ -2,16 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{9..11} )
-inherit distutils-r1
 
-DESCRIPTION=""
-HOMEPAGE="
-	https://pypi.org/project/python-epc/
-"
-SRC_URI="https://github.com/tkf/python-epc/archive/refs/tags/v0.0.5.tar.gz -> ${P}.tar.gz"
+inherit distutils-r1 pypi
+
+DESCRIPTION="EPC (RPC stack for Emacs Lisp) for Python"
+HOMEPAGE="http://python-epc.readthedocs.org"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -21,6 +18,3 @@ RESTRICT="test"
 RDEPEND="
 	dev-python/sexpdata[$PYTHON_USEDEP]
 "
-BDEPEND=""
-
-distutils_enable_tests pytest
