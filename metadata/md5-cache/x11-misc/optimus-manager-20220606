@@ -1,17 +1,17 @@
-BDEPEND=python_targets_python3_10? ( >=dev-lang/python-3.10.11:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.3:3.11 ) python_targets_python3_10? ( >=dev-lang/python-3.10.11:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.3:3.11 ) >=dev-python/setuptools-65.7.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] virtual/pkgconfig
+BDEPEND=python_targets_python3_10? ( dev-lang/python:3.10 ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_10? ( dev-lang/python:3.10 ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 ) >=dev-python/gpep517-13[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] >=dev-python/setuptools-67.8.0-r1[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] virtual/pkgconfig
 DEFINED_PHASES=compile configure install postinst postrm prepare test
-DEPEND=dev-python/dbus-python[python_targets_python3_10(-)?,python_targets_python3_11(-)?] sys-apps/pciutils x11-apps/xrandr x11-apps/mesa-progs dev-python/py3nvml
+DEPEND=dev-python/dbus-python[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] sys-apps/pciutils x11-apps/xrandr x11-apps/mesa-progs dev-python/py3nvml
 DESCRIPTION=Management utility to handle GPU switching for Optimus laptops
 EAPI=8
 HOMEPAGE=https://github.com/xmine64/optimus-manager
 INHERIT=distutils-r1 systemd
-IUSE=elogind gdm lightdm sddm systemd python_targets_python3_10 python_targets_python3_11
+IUSE=elogind gdm lightdm sddm systemd python_targets_python3_10 python_targets_python3_11 python_targets_python3_12
 KEYWORDS=-* ~amd64
 LICENSE=MIT
-RDEPEND=dev-python/dbus-python[python_targets_python3_10(-)?,python_targets_python3_11(-)?] sys-apps/pciutils x11-apps/xrandr x11-apps/mesa-progs dev-python/py3nvml python_targets_python3_10? ( >=dev-lang/python-3.10.11:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.3:3.11 ) >=dev-python/setuptools-65.7.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?]
-REQUIRED_USE=elogind? ( !systemd ) || ( python_targets_python3_10 python_targets_python3_11 )
+RDEPEND=dev-python/dbus-python[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] sys-apps/pciutils x11-apps/xrandr x11-apps/mesa-progs dev-python/py3nvml python_targets_python3_10? ( dev-lang/python:3.10 ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 )
+REQUIRED_USE=elogind? ( !systemd ) || ( python_targets_python3_10 python_targets_python3_11 python_targets_python3_12 )
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/Askannz/optimus-manager/archive/29d737fec9fa710c87c53514f7dd398b1ec750b5.tar.gz -> optimus-manager-20220606.tar.gz
-_eclasses_=out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	c19072c3cd7ac5cb21de013f7e9832e0	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	python-utils-r1	a34d5f83235297b76d71eaf8deb53768	python-r1	3c6cd0f418ba702c186a9865b85e704d	distutils-r1	2d32e797ee29a8ffdd452f4a85860666	systemd	5f4bb0758df2e483babf68cd517078ca
-_md5_=850884b38c1b92fad689d156c019981d
+_eclasses_=toolchain-funcs	8e3fb781f3258ae2757d1dfc2c7c170e	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	ad475baa777c9978fa035216c8264a10	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	30dbf3c5a31db09a19f31ad0a68f2405	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	f3010c780f65d1bb5aea15a9af1adc9c	python-utils-r1	7661dc585f75dd1f81eccefe37bef093	python-r1	b3f874304c1bda6ffc3450ebb4ae5169	distutils-r1	b7cd5736a595ec0df9b164d5aec6f228	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=dce5402b3157dac396fb15534cde9d1f

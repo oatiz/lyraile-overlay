@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{9..12} )
 inherit distutils-r1
 
 DESCRIPTION="Easy GPU switching for Nvidia Optimus laptops under Linux"
@@ -16,7 +16,3 @@ SLOT="0"
 KEYWORDS="-* ~amd64"
 
 RESTRICT="test"
-
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""

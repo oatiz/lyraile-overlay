@@ -11,7 +11,7 @@ SLOT=${MY_PV%%[.+]*}
 
 SRC_URI="https://cdn.azul.com/zulu/bin/zulu${MY_ZULU_PV}-linux_amd64.deb"
 
-DESCRIPTION="Prebuilt Java JDK binaries for musl provided by Zulu"
+DESCRIPTION="Prebuilt Java JDK binaries provided by Zulu"
 HOMEPAGE="https://www.azul.com/downloads/zulu-community/"
 LICENSE="GPL-2-with-classpath-exception"
 KEYWORDS="-* ~amd64"
@@ -21,7 +21,8 @@ RDEPEND="
 	media-libs/fontconfig:1.0
 	media-libs/freetype:2
 	>=sys-apps/baselayout-java-0.1.0-r1
-	>=sys-libs/glibc-2.2.5:*
+	elibc_glibc? ( >=sys-libs/glibc-2.2.5:* )
+	elibc_musl? ( sys-libs/musl )
 	sys-libs/zlib
 	alsa? ( media-libs/alsa-lib )
 	cups? ( net-print/cups )

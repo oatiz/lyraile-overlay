@@ -16,16 +16,11 @@ SRC_URI="https://deb.tableplus.com/debian/22/pool/main/t/${MY_PN}/${MY_PN}_${PV}
 "
 RESTRICT="mirror"
 
-LICENSE="custom"
+LICENSE="tableplus-EULA"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 
-IUSE=""
-REQUIRED_USE=""
-
-DEPEND=""
 RDEPEND="
-	${DEPEND}
 	gnome-base/gnome-keyring
 	x11-libs/gtksourceview:3.0
 	dev-libs/libgee
@@ -38,7 +33,8 @@ src_prepare() {
 	default
 
 	[[ -d "${S}"/opt/"${MY_PN}"/lib64 ]] || mkdir -p "${S}"/opt/"${MY_PN}"/lib64 || die
-	mv "${S}/usr/lib/x86_64-linux-gnu/"{liblber-2.5.so.0,libldap-2.5.so.0,libsasl2.so.2} "${S}"/opt/"${MY_PN}"/lib64/ || die
+	mv "${S}/usr/lib/x86_64-linux-gnu/"{liblber-2.5.so.0,libldap-2.5.so.0,libsasl2.so.2} \
+	   "${S}"/opt/"${MY_PN}"/lib64/ || die
 	mv "${S}/usr/lib/libgio-2.0.so.0.6800.4" "${S}"/opt/"${MY_PN}"/lib64/ || die
 
 	if [ -e "${S}"/opt/"${MY_PN}"/"${MY_PN}".desktop ]; then

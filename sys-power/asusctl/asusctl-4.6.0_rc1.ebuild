@@ -11,28 +11,27 @@ declare -A GIT_CRATES=(
 	[notify-rust]="https://github.com/flukejones/notify-rust;c83082a2549932bde52a4ec449b9981fc39e9a0d"
 )
 
-inherit systemd cargo git-r3 linux-info xdg desktop
+inherit systemd cargo git-r3 linux-info xdg desktop udev
 
 _PN="asusd"
 
-DESCRIPTION="${PN} (${_PN}) is a utility for Linux to control many aspects of various ASUS laptops."
+DESCRIPTION="A utility for Linux to control many aspects of various ASUS laptops."
 HOMEPAGE="https://asus-linux.org"
 SRC_URI="
-	https://gitlab.com/asus-linux/${PN}/-/archive/${PV/_/-}/${PN}-${PV/_/-}.tar.gz
+	https://gitlab.com/asus-linux/${PN}/-/archive/${PV/_/-}/${PN}-${PV/_/-}.tar.bz2
 	"$(cargo_crate_uris)"
-	https://gitlab.com/asus-linux/supergfxctl/-/archive/${SGFX_COMMIT}/supergfxctl-${SGFX_COMMIT}.tar.gz -> supergfxctl-${SGFX_COMMIT}.gl.tar.gz
+	https://gitlab.com/asus-linux/supergfxctl/-/archive/${SGFX_COMMIT}/supergfxctl-${SGFX_COMMIT}.tar.bz2 ->
+supergfxctl-${SGFX_COMMIT}.gl.tar.bz2
 "
 
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-2 Boost-1.0 ISC LicenseRef-UFL-1.0 MIT MPL-2.0 OFL-1.1 Unicode-DFS-2016 Unlicense ZLIB"
 SLOT="0/4"
 KEYWORDS="-* ~amd64"
-IUSE="+acpi gfx gnome gui notify systemd"
-REQUIRED_USE="gnome? ( gfx )"
+IUSE="+acpi gui notify systemd"
 
 RESTRICT="mirror strip"
 
-RDEPEND="!!sys-power/rog-core
-	!!sys-power/asus-nb-ctrl
+RDEPEND="
 	acpi? ( sys-power/acpi_call )
 	>=sys-power/power-profiles-daemon-0.10.0
 "
@@ -42,11 +41,6 @@ DEPEND="${RDEPEND}
 	>=sys-devel/llvm-10.0.1
 	>=sys-devel/clang-runtime-10.0.1
 	dev-libs/libusb:1
-	gfx? (
-		!sys-kernel/gentoo-g14-next
-		>=sys-power/supergfxctl-2.0.0[gnome?]
-	)
-	gnome? ( gnome-extra/gnome-shell-extension-asusctl-gex:0/4 )
 	systemd? ( sys-apps/systemd:0= )
 	sys-apps/dbus
 "
@@ -57,7 +51,7 @@ S="${WORKDIR}/${PN}-${PV/_/-}"
 src_unpack() {
 	cargo_src_unpack
 	unpack ${PN}-${PV/_/-}.tar.gz
-	sed -i "1s/.*/Version=\"${PV}\"/" ${S}/Makefile
+	sed -i "1s/.*/Version=\"${PV}\"/" "${S}"/Makefile
 }
 
 src_prepare() {
@@ -65,11 +59,16 @@ src_prepare() {
 
 	# checking for touchpad dependencies
 	k_wrn_touch=""
-	linux_chkconfig_present I2C_HID_CORE || k_wrn_touch="${k_wrn_touch}> CONFIG_I2C_HID_CORE not found, should be either builtin or build as module\n"
-	linux_chkconfig_present I2C_HID_ACPI || k_wrn_touch="${k_wrn_touch}> CONFIG_I2C_HID_ACPI not found, should be either builtin or build as module\n"
-	linux_chkconfig_present HID_ASUS || k_wrn_touch="${k_wrn_touch}> CONFIG_HID_ASUS not found, should be either builtin or build as module\n"
-	linux_chkconfig_present PINCTRL_AMD || k_wrn_touch="${k_wrn_touch}> CONFIG_PINCTRL_AMD not found, should be either builtin or build as module\n"
-	[[ ${k_wrn_touch} != "" ]] && ewarn "\nKernel configuration issue(s), needed for touchpad support:\n\n${k_wrn_touch}"
+	linux_chkconfig_present I2C_HID_CORE || \
+		k_wrn_touch="${k_wrn_touch}> CONFIG_I2C_HID_CORE not found, should be either builtin or build as module\n"
+	linux_chkconfig_present I2C_HID_ACPI || \
+		k_wrn_touch="${k_wrn_touch}> CONFIG_I2C_HID_ACPI not found, should be either builtin or build as module\n"
+	linux_chkconfig_present HID_ASUS || \
+		k_wrn_touch="${k_wrn_touch}> CONFIG_HID_ASUS not found, should be either builtin or build as module\n"
+	linux_chkconfig_present PINCTRL_AMD || \
+		k_wrn_touch="${k_wrn_touch}> CONFIG_PINCTRL_AMD not found, should be either builtin or build as module\n"
+	[[ ${k_wrn_touch} != "" ]] && \
+		ewarn "\nKernel configuration issue(s), needed for touchpad support:\n\n${k_wrn_touch}"
 
 	# only build rog-control-center when "gui" flag is set
 	! use gui && eapply "${FILESDIR}/${PN}-${PV%%_*}"-disable_rog-cc.patch
@@ -123,7 +122,7 @@ src_install() {
 
 	if use gui; then
 		insinto /usr/share/rog-gui/layouts/
-		find "${S}/rog-aura/data/layouts" -type f -name "*.ron" -exec doins '{}' + 
+		find "${S}/rog-aura/data/layouts" -type f -name "*.ron" -exec doins '{}' +
 
 		insinto /usr/share/icons/hicolor/512x512/apps/
 		doins rog-control-center/data/rog-control-center.png
@@ -134,7 +133,7 @@ src_install() {
 
 	# animes (apps)
 	insinto /usr/share/asusd/
-	find "rog-anime/data/anime" -type f -exec doins "{}" + 
+	find "rog-anime/data/anime" -type f -exec doins "{}" +
 
 	# binary
 	dobin "target/release/"{asusd,asusd-user,asusctl}

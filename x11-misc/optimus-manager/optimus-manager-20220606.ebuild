@@ -1,12 +1,12 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9..11} )
-DISTUTILS_USE_SETUPTOOLS=rdepend
+PYTHON_COMPAT=( python3_{9..12} )
+DISTUTILS_USE_PEP517=setuptools
 
-inherit distutils-r1 systemd 
+inherit distutils-r1 systemd
 
 DESCRIPTION="Management utility to handle GPU switching for Optimus laptops"
 HOMEPAGE="https://github.com/xmine64/optimus-manager"
@@ -53,11 +53,11 @@ src_install() {
 
 		# sleep
 		insinto /usr/$(get_libdir)/systemd/system-sleep
-		doins ${FILESDIR}/systemd/suspend/${PN}.py
+		doins "${FILESDIR}"/systemd/suspend/"${PN}".py
 		fperms 755 /usr/$(get_libdir)/systemd/system-sleep/${PN}.py
 
 		# service
-		systemd_dounit ${FILESDIR}/systemd/${PN}.service
+		systemd_dounit "${FILESDIR}"/systemd/"${PN}".service
 	fi
 
 	if use elogind; then
@@ -67,7 +67,7 @@ src_install() {
 
 		# sleep
 		insinto $(get_libdir)/elogind/system-sleep
-		doins ${FILESDIR}/systemd/suspend/${PN}.py
+		doins "${FILESDIR}"/systemd/suspend/"${PN}".py
 		fperms 0755 /$(get_libdir)/elogind/system-sleep/${PN}.py
 
 		# initd
@@ -107,7 +107,8 @@ pkg_postinst() {
 	if use systemd; then
 		elog "optimus-manager : enabling optimus-manager.service"
 		mkdir -p /etc/systemd/system/graphical.target.wants/
-		ln -s /usr/lib/systemd/system/optimus-manager.service /etc/systemd/system/graphical.target.wants/optimus-manager.service
+		ln -s /usr/lib/systemd/system/optimus-manager.service \
+		   /etc/systemd/system/graphical.target.wants/optimus-manager.service
 		elog "Please reboot your computer before using optimus-manager"
 		elog
 	fi
@@ -135,7 +136,7 @@ pkg_postrm() {
 	elog "optimus-manager : cleaning up auto-generated Xorg conf"
 	xorg_conf=/etc/X11/xorg.conf.d/10-optimus-manager.conf
 	if [ -f "$xorg_conf" ]; then
-	    rm $xorg_conf
+		rm $xorg_conf
 	fi
 
 	if use systemd; then
