@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9,10,11} )
+PYTHON_COMPAT=( python3_{9..11} )
 
 inherit python-r1 autotools
 
@@ -13,8 +13,10 @@ SRC_URI="https://github.com/eonpatapon/mpDris2/archive/refs/tags/${PV}.tar.gz ->
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~ppc ~ppc64 x86"
+KEYWORDS="amd64"
 IUSE=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
 S="${WORKDIR}/mpDris2-${PV}"
 
 DEPEND="
@@ -22,6 +24,7 @@ DEPEND="
 	>=dev-python/pygobject-2.14[${PYTHON_USEDEP}]
 	>=dev-python/python-mpd2-3.0.5[${PYTHON_USEDEP}]
 "
+RDEPEND="${PYTHON_DEPS}"
 
 DOCS="AUTHORS COPYING INSTALL NEWS README README.md"
 
@@ -42,4 +45,3 @@ pkg_postinst() {
 	elog "See the documentation for more details"
 	elog "https://wiki.gentoo.org/wiki/Localization/Guide/en#LINGUAS"
 }
-
