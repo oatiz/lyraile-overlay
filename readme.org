@@ -9,10 +9,11 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | dev-libs/tdlib                 |                 1.8 |                                                      |
 | dev-perl/Graph-Easy            |             0.760.0 | Patched chinese.patch                                |
 | dev-python/python-epc          |               0.0.5 | lsp-bridge                                           |
-| dev-java/oraclejdk-bin         | 1.8.0.351,11.0.16.1 | Support eselect-java                                 |
+| dev-java/oraclejdk-bin         | 1.8.0.381,11.0.16.1 | Support eselect-java                                 |
 | dev-java/openjdk-bin           |         1.8, 11, 17 | Zulu JDK                                             |
+| dev-java/vscode-java-bin       |              1.22.1 | Zulu JDK                                             |
 | media-fonts/lxgw-wenkai-screen |             1.250.2 |                                                      |
-| net-im/schildichat-desktop-bin |              1.11.8 |                                                      |
+| net-im/schildichat-desktop-bin |        1.11.30-sc.2 |                                                      |
 | sys-power/asusctl              |               4.6.0 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc   |
 | sys-power/auto-cpufreq         |               1.9.4 |                                                      |
 | www-apps/camunda-modeler-bin   |               5.9.0 |                                                      |
