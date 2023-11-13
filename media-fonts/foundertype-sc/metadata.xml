@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-    <!-- maintainer-needed -->
     <upstream>
-        <remote-id type="github">camunda/camunda-modeler</remote-id>
+        <remote-id type="github">oatiz/lyraile-overlay</remote-id>
     </upstream>
-    <use>
-        <flag name="hidpi">hidpi support</flag>
-    </use>
 </pkgmetadata>
