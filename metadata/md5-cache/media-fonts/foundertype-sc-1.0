@@ -1,0 +1,13 @@
+BDEPEND=X? ( >=x11-apps/mkfontscale-1.2.0 media-fonts/encodings )
+DEFINED_PHASES=install postinst postrm setup unpack
+DESCRIPTION=FounderType Free Fonts.
+EAPI=8
+HOMEPAGE=https://github.com/wordshub/free-font
+INHERIT=unpacker font
+IUSE=X
+KEYWORDS=amd64
+LICENSE=OFL-1.1
+SLOT=0
+SRC_URI=https://github.com/oatiz/lyraile-overlay/releases/download/tempfile/foundertype-sc-1.0.tar.xz
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	aa6a4e924009232d8b78b31e932c30b5	font	aa113a3df9cd0a9693a1c1ee7c34a6eb
+_md5_=11d37cf19317bde119e8c6d89cb27ef2

@@ -12,5 +12,5 @@ RDEPEND=gui-apps/wl-clipboard x11-misc/xdg-utils
 RESTRICT=mirror strip
 SLOT=0
 SRC_URI=https://github.com/sentriz/cliphist/archive/v0.4.0.tar.gz -> cliphist-0.4.0.tar.gz https://github.com/oatiz/gentoo-go-deps/releases/download/cliphist-0.4.0/cliphist-0.4.0-deps.tar.xz https://github.com/oatiz/gentoo-go-deps/releases/download/cliphist-0.4.0/cliphist-0.4.0-vendor.tar.xz
-_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	go-module	8624eede24936fd7666e5298e5332f22
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	go-module	8624eede24936fd7666e5298e5332f22
 _md5_=b24f944027802ac9d3eb513763741ff8

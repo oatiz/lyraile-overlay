@@ -10,5 +10,5 @@ LICENSE=BSL-1.0
 RDEPEND=sys-devel/gcc dev-libs/openssl sys-libs/zlib dev-util/gperf dev-util/cmake
 SLOT=0
 SRC_URI=https://github.com/tdlib/td/archive/v1.8.0.tar.gz -> tdlib-1.8.0.tar.gz
-_eclasses_=toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	be27a904c614cb93ae037762dc69bcc2	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	f3010c780f65d1bb5aea15a9af1adc9c	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	ea305d3be967deed8faa5c9e94f9aee4
+_eclasses_=toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	baa4d385108ac87993edac956a916a36	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	39e7a84b06eff4efd9f2e0c3d1668b98	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	0f2e0c197fad0312f3c4765c9cf36271
 _md5_=3033c38bc4cbf5f8a003437aaf9a2bc8

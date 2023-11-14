@@ -1,0 +1,13 @@
+BDEPEND=gui-wm/hyprland x11-libs/pixman x11-libs/libdrm >=dev-util/meson-1.2.1 >=dev-util/ninja-1.8.2 dev-util/meson-format-array
+DEFINED_PHASES=compile configure install test
+DESCRIPTION=A plugin to provide awesome-like workspace behavior
+EAPI=8
+HOMEPAGE=https://github.com/Duckonaut/split-monitor-workspaces
+INHERIT=meson
+KEYWORDS=~amd64
+LICENSE=BSD-3
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/Duckonaut/split-monitor-workspaces/archive/2b1abdbf9e9de9ee660540167c8f51903fa3d959.tar.gz -> split-monitor-workspaces-20231113.tar.gz
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	39e7a84b06eff4efd9f2e0c3d1668b98	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	30999b80ec1fe0b4af340ae819375346	meson	1be925a1f585b2f19a8e45737f09016c
+_md5_=4467792de21fed7cbd9998f706f95272
