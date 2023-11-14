@@ -5,18 +5,28 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 ** Available packages
 | Package Name                   |   Available Version | Additional Information                               |
 | app-text/goldendict            |            20230422 | pin version d0ae253c270a13c77a02199eff059e063e837ab6 |
-| dev-db/tableplus-bin           |             0.1.186 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                        |
-| dev-libs/tdlib                 |                 1.8 |                                                      |
-| dev-perl/Graph-Easy            |             0.760.0 | Patched chinese.patch                                |
-| dev-python/python-epc          |               0.0.5 | lsp-bridge                                           |
+| app-vim/catppuccin             |            20231114 | pin version be4725cfc3fb6ed96f706d9d1bd5baa24d2b048c |
+| dev-db/tableplus-bin           |             0.1.212 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                        |
+| dev-dependency/lsp-bridge      |                 0.1 | emacs lsp-bridge runtime requirements                |
 | dev-java/oraclejdk-bin         | 1.8.0.381,11.0.16.1 | Support eselect-java                                 |
 | dev-java/openjdk-bin           |         1.8, 11, 17 | Zulu JDK                                             |
-| dev-java/vscode-java-bin       |              1.22.1 | Zulu JDK                                             |
+| dev-libs/tdlib                 |                 1.8 |                                                      |
+| dev-perl/Graph-Easy            |             0.760.0 | Patched chinese.patch                                |
+| dev-python/epc                 |               0.0.5 | lsp-bridge                                           |
+| dev-python/py3nvml             |               0.2.7 | lsp-bridge                                           |
+| gui-apps/cliphist              |               0.4.0 |                                                      |
+| gui-apps/rofi-wayland          |               1.7.5 |                                                      |
+| split-monitor-workspaces       |            20231113 | hyprland plugin                                      |
+| media-fonts/foundertype-sc     |                 1.0 |                                                      |
 | media-fonts/lxgw-wenkai-screen |             1.250.2 |                                                      |
+| media-sound/mpdris2            |               0.9.1 |                                                      |
 | net-im/schildichat-desktop-bin |        1.11.30-sc.2 |                                                      |
-| sys-power/asusctl              |               4.6.0 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc   |
+| net-proxy/clash-meta           |              1.16.0 | backup gentoo-zh                                     |
+| sys-boot/etcher-bin            |             1.18.11 |                                                      |
+| sys-power/asusctl              |           4.7.0_rc2 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc   |
 | sys-power/auto-cpufreq         |               1.9.4 |                                                      |
 | www-apps/camunda-modeler-bin   |               5.9.0 |                                                      |
+| www-apps/chatgpt-next-web-bin  |              2.9.10 |                                                      |
 | www-apps/z-library             |                9999 |                                                      |
 | x11-misc/clipmenu              |               6.2.0 |                                                      |
 | x11-misc/envycontrol           |               3.2.0 |                                                      |
