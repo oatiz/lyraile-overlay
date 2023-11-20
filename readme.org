@@ -33,3 +33,4 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | x11-misc/clipmenu              |               6.2.0 |                                                      |
 | x11-misc/envycontrol           |               3.2.0 |                                                      |
 | x11-misc/optimus-manager       |            20220606 |                                                      |
+| x11-terms/wezterm              |  20230712.072601-r1 | fix [[https://github.com/wez/wezterm/issues/3996][#3996]]                                            |
