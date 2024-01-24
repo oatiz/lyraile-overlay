@@ -10,7 +10,9 @@ MY_PN="fd4857a8226ff3f539e3f2e538fc6968c3e1b8c8"
 
 DESCRIPTION="A utility package to collect various Icon Fonts and propertize them within Emacs"
 HOMEPAGE="https://github.com/domtronn/all-the-icons.el"
-SRC_URI="https://github.com/domtronn/all-the-icons.el/archive/refs/tags/${PV}.tar.gz"
+SRC_URI="https://github.com/domtronn/all-the-icons.el/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
+RESTRICT="mirror"
 
 LICENSE="OFL-1.1"
 SLOT="0"
