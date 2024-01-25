@@ -1,0 +1,13 @@
+BDEPEND=app-arch/unzip X? ( >=x11-apps/mkfontscale-1.2.0 media-fonts/encodings )
+DEFINED_PHASES=install postinst postrm setup
+DESCRIPTION=IBM Plex Mono Nerd Fonts with Ligatures
+EAPI=8
+HOMEPAGE=https://github.com/ayamir/LigaBlexMonoNerd
+INHERIT=font
+IUSE=X
+KEYWORDS=amd64
+LICENSE=OFL-1.1
+SLOT=0
+SRC_URI=https://codeload.github.com/ayamir/LigaBlexMonoNerd/zip/fd4857a8226ff3f539e3f2e538fc6968c3e1b8c8 -> plex-mono-nerd-20240120.zip
+_eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb
+_md5_=19e3acb7c6f71bbabe1ec51f30d53148
