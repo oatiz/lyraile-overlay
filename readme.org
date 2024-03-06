@@ -30,6 +30,7 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | net-im/schildichat-desktop-bin |        1.11.30-sc.2 |                                                      |
 | net-misc/apifox-bin            |               2.5.0 |                                                      |
 | net-proxy/clash-meta           |              1.16.0 | backup gentoo-zh                                     |
+| sci-libs/intel-oneapi-openmp   |            2023.2.0 | 49495                                                |
 | sys-boot/etcher-bin            |             1.18.11 |                                                      |
 | sys-power/asusctl              |           4.7.0_rc2 | Copied From [[https://lab.retarded.farm/zappel/zGentoo][zGenoo-overlay]], add support for openrc   |
 | sys-power/auto-cpufreq         |               1.9.4 |                                                      |
