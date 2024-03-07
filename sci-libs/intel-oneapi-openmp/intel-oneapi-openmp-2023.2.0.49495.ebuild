@@ -50,4 +50,8 @@ src_install() {
 	dosym "$(ver_cut 1-3)" /opt/intel/oneapi/compiler/latest
 
 	find "${ED}"/opt/intel/oneapi/compiler/$(ver_cut 1-3) -name '*.so' -exec chmod 755 '{}' + || die
+
+	newenvd - "70intel-openmp" <<-_EOF_
+			 LDPATH="${EPREFIX}/opt/intel/oneapi/compiler/$(ver_cut 1-3)/linux/compiler/lib/intel64_lin"
+_EOF_
 }
