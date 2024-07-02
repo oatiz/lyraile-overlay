@@ -1,4 +1,4 @@
-BDEPEND=gui-wm/hyprland x11-libs/pixman x11-libs/libdrm >=dev-build/meson-1.2.1 app-alternatives/ninja dev-build/meson-format-array
+BDEPEND=gui-wm/hyprland >=dev-libs/hyprlang-0.4.0 x11-libs/pixman x11-libs/libdrm >=dev-build/meson-1.2.1 app-alternatives/ninja dev-build/meson-format-array
 DEFINED_PHASES=compile configure install test
 DESCRIPTION=A plugin to provide awesome-like workspace behavior
 EAPI=8
@@ -8,6 +8,6 @@ KEYWORDS=~amd64
 LICENSE=BSD-3
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://github.com/Duckonaut/split-monitor-workspaces/archive/2b1abdbf9e9de9ee660540167c8f51903fa3d959.tar.gz -> split-monitor-workspaces-20231113.tar.gz
+SRC_URI=https://github.com/Duckonaut/split-monitor-workspaces/archive/29b70aa8e194930cc3723c6f22f1bbf42a9c66cf.tar.gz -> split-monitor-workspaces-20240226.tar.gz
 _eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	042f4cc53680245bf99a84669b94155a	meson	e322276188f86eacb29ae081ba5485c8
-_md5_=4467792de21fed7cbd9998f706f95272
+_md5_=9826f268750f71c1a05d7a6c706ec71d

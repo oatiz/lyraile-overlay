@@ -1,0 +1,12 @@
+DEFINED_PHASES=install prepare unpack
+DESCRIPTION=Intel oneAPI OpenMP runtime library
+EAPI=8
+HOMEPAGE=https://software.intel.com/content/www/us/en/develop/tools/oneapi.html
+INHERIT=unpacker
+KEYWORDS=~amd64
+LICENSE=ISSL
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://apt.repos.intel.com/oneapi/pool/main/intel-oneapi-openmp-2023.2.0-49495_amd64.deb https://apt.repos.intel.com/oneapi/pool/main/intel-oneapi-openmp-2023.2.0-2023.2.0-49495_amd64.deb https://apt.repos.intel.com/oneapi/pool/main/intel-oneapi-openmp-common-2023.2.0-2023.2.0-49495_all.deb https://apt.repos.intel.com/oneapi/pool/main/intel-oneapi-runtime-openmp-2023.2.0-49495_amd64.deb https://apt.repos.intel.com/oneapi/pool/main/intel-oneapi-runtime-openmp-common-2023.1.0-46305_all.deb
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	7b40f3faa3e2e12f5cf6d36d0fbfcd09
+_md5_=2214c0e440eec453d4b9c3b3bd7a3277

@@ -1,0 +1,13 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=WeChat Testing with bwrap sandbox
+EAPI=8
+HOMEPAGE=https://aur.archlinux.org/packages/wechat-uos-bwrap
+INHERIT=unpacker desktop
+KEYWORDS=~amd64
+LICENSE=custom
+RDEPEND=sys-apps/bubblewrap sys-apps/lsb-release x11-libs/libnotify
+RESTRICT=mirror strip
+SLOT=0
+SRC_URI=https://cdn4.cnxclm.com/uploads/2024/03/05/3VDyAc0x_wechat-beta_1.0.0.145_amd64.deb?attname=wechat-beta_1.0.0.145_amd64.deb -> wechat-uos-1.0.0.145.deb https://home-store-packages.uniontech.com/appstore/pool/appstore/c/com.qq.weixin/com.tencent.weixin_2.1.8_amd64.deb
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	7b40f3faa3e2e12f5cf6d36d0fbfcd09	desktop	021728fdc1b03b36357dbc89489e0f0d
+_md5_=ec1abff2791b7aca34aa14a00f77173c
