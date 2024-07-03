@@ -7,20 +7,18 @@ MY_PN=${PN/-bin/}
 
 DESCRIPTION="The programming language compiled to bash"
 HOMEPAGE="https://github.com/Ph0enixKM/Amber"
-SRC_URI="https://github.com/Ph0enixKM/Amber/releases/download/${PV}-alpha/${MY_PN}_linux_x86_64 -> ${P}_linux_x86_64"
+SRC_URI="https://github.com/Ph0enixKM/Amber/releases/download/${PV}-alpha/${MY_PN}-x86_64-unknown-linux-gnu.tar.xz -> ${P}-x86_64-unknown-linux-gnu.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RESTRICT="mirror"
+S="${WORKDIR}/${MY_PN}-x86_64-unknown-linux-gnu"
 
-RDEPEND="${DEPEND}"
+RESTRICT="mirror"
 
 QA_PREBUILT="*"
 
-S="${WORKDIR}"
-
 src_install() {
-	newbin "${DISTDIR}/${P}_linux_x86_64" "${MY_PN}"
+	dobin "${MY_PN}"
 }
