@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst postrm preinst unpack
+DESCRIPTION=A matrix client based on Element with a more instant messaging experience.
+EAPI=8
+HOMEPAGE=https://schildi.chat
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=unpacker xdg
+KEYWORDS=-* ~amd64
+LICENSE=Apache-2.0
+RDEPEND=dev-db/sqlcipher dev-libs/openssl
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/SchildiChat/schildichat-desktop/releases/download/v1.11.36-sc.3/schildichat-desktop_1.11.36-sc.3_amd64.deb
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	7b40f3faa3e2e12f5cf6d36d0fbfcd09	xdg-utils	baea6080dd821f5562d715887954c9d3	xdg	4a14c5c24f121e7da66e5aab4a168c6e
+_md5_=d9539c2d20d111a2b5bf8c2e46dbfd0a
