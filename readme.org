@@ -4,6 +4,7 @@ Lyraile's personal Gentoo overlay for testing.
 For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENTOO-ZH OVERLAY]] instead.
 ** Available packages
 | Package Name                   |   Available Version | Additional Information                               |
+| app-containers/docker-slim     |             1.40.11 |                                                      |
 | app-misc/mqttx-cli-bin         |              1.10.0 |                                                      |
 | app-text/goldendict            |            20230422 | pin version d0ae253c270a13c77a02199eff059e063e837ab6 |
 | app-vim/catppuccin             |            20231114 | pin version be4725cfc3fb6ed96f706d9d1bd5baa24d2b048c |
