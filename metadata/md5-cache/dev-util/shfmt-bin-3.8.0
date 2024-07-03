@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=A shell parser, formatter, and interpreter with bash support
+EAPI=8
+HOMEPAGE=https://github.com/mvdan/sh
+KEYWORDS=~amd64
+LICENSE=BSD-3
+RESTRICT=mirror strip
+SLOT=0
+SRC_URI=https://github.com/mvdan/sh/releases/download/v3.8.0/shfmt_v3.8.0_linux_amd64
+_md5_=b824c3219cec6d4428088f26f33c6d44
