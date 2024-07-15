@@ -1,0 +1,13 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=A Modern Redis GUI Client
+EAPI=8
+HOMEPAGE=https://redis.tinycraft.cc
+INHERIT=unpacker desktop
+KEYWORDS=-* ~amd64
+LICENSE=GPL-3
+RDEPEND=dev-libs/glib:2 net-libs/webkit-gtk:4 x11-libs/gdk-pixbuf:2 x11-libs/gtk+:3
+RESTRICT=bindist mirror
+SLOT=0
+SRC_URI=https://github.com/tiny-craft/tiny-rdm/releases/download/v1.1.14/tiny-rdm_1.1.14_linux_amd64.deb
+_eclasses_=multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	unpacker	7b40f3faa3e2e12f5cf6d36d0fbfcd09	desktop	021728fdc1b03b36357dbc89489e0f0d
+_md5_=f02d1346f9aa2756208c07f6f1b97a84
