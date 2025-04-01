@@ -10,12 +10,12 @@ For some packages you'd better use [[https://github.com/microcai/gentoo-zh][GENT
 | app-text/goldendict            |            20230422 | pin version d0ae253c270a13c77a02199eff059e063e837ab6 |
 | app-vim/catppuccin             |            20231114 | pin version be4725cfc3fb6ed96f706d9d1bd5baa24d2b048c |
 | app-vim/vim-wayland-clipboard  |            20231114 | pin version 6d0c9f8e7deac8a90c51d4c1e69068cb86361933 |
-| dev-db/tableplus-bin           |           1.1.8.252 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                        |
+| dev-db/tableplus-bin           |           1.2.4-260 | Converted from [[https://aur.archlinux.org/packages/tableplus][AUR(tableplus)]]                        |
 | dev-dependency/lsp-bridge      |                 0.1 | emacs lsp-bridge runtime requirements                |
 | dev-dependency/my-vim-depends  |                 0.1 |                                                      |
 | dev-java/google-java-format    |              1.22.0 |                                                      |
 | dev-java/oraclejdk-bin         | 1.8.0.381,11.0.16.1 | Support eselect-java                                 |
-| dev-java/openjdk-bin           |    1.8, 11, 17， 21 | Zulu JDK                                             |
+| dev-java/openjdk-bin           |     1.8, 11, 17， 21 | Zulu JDK                                             |
 | dev-lang/amber-bin             |               0.3.5 |                                                      |
 | dev-libs/tdlib                 |                 1.8 |                                                      |
 | dev-perl/Graph-Easy            |             0.760.0 | Patched chinese.patch                                |
