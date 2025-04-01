@@ -7,7 +7,7 @@ inherit font
 
 DESCRIPTION="LXGW WenKai for Screen Reading"
 HOMEPAGE="https://github.com/lxgw/LxgwWenKai-Screen"
-SRC_URI="https://github.com/lxgw/LxgwWenKai-Screen/releases/download/v${PV}/LXGWWenKaiScreen.ttf"
+SRC_URI="https://github.com/lxgw/LxgwWenKai-Screen/releases/download/v${PV}/LXGWWenKaiMonoScreen.ttf -> ${P}.ttf"
 
 LICENSE="OFL-1.1"
 SLOT="0"
