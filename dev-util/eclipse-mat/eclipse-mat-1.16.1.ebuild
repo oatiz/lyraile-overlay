@@ -13,14 +13,13 @@ SRC_URI="https://eclipse.mirror.rafal.ca/mat/1.16.1/rcp/MemoryAnalyzer-1.16.1.20
 
 S="${WORKDIR}/mat"
 
-LICENSE=""
+LICENSE="EPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
-
 
 src_install() {
 	insinto /opt/eclipse-mat
