@@ -1,0 +1,9 @@
+DEFINED_PHASES=compile install
+DESCRIPTION=The Memory Pool System
+EAPI=8
+HOMEPAGE=http://www.ravenbrook.com/project/mps
+KEYWORDS=~amd64
+LICENSE=BSD-2.0
+SLOT=0
+SRC_URI=https://github.com/Ravenbrook/mps/archive/9fd0577cf1231e61c9801c81499e5d16d0743806.tar.gz -> mps-202412271530.tar.gz
+_md5_=86f90dfd8466c0d27a51feaa58b8e5b7

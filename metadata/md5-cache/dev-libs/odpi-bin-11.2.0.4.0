@@ -1,0 +1,12 @@
+BDEPEND=app-arch/rpm2targz
+DEFINED_PHASES=install nofetch prepare unpack
+DESCRIPTION=Oracle Database Programming Interface for Drivers and Applications
+EAPI=8
+HOMEPAGE=https://github.com/oracle/odpi
+INHERIT=rpm
+KEYWORDS=~amd64
+LICENSE=OTN
+SLOT=0
+SRC_URI=oracle-instantclient11.2-basic-11.2.0.4.0-1.x86_64.rpm oracle-instantclient11.2-sqlplus-11.2.0.4.0-1.x86_64.rpm
+_eclasses_=estack	c61c368a76fdf3a82fdf8dbaebea3804	rpm	7828cd38ff559545ca52f92064d0f8f4
+_md5_=78176619523801a40c0d8bfeba0298ed

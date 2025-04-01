@@ -1,0 +1,12 @@
+BDEPEND=|| ( dev-lang/zig:0.13 dev-lang/zig-bin:0.13 ) virtual/pkgconfig
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DESCRIPTION=Fast, feature-rich, and cross-platform terminal emulator
+EAPI=8
+HOMEPAGE=https://ghostty.org
+INHERIT=zig
+KEYWORDS=~amd64
+LICENSE=MIT
+SLOT=0
+SRC_URI=https://github.com/ghostty-org/ghostty/archive/refs/tags/v1.0.0.tar.gz -> ghostty-1.0.0.tar.gz https://github.com/mitchellh/zig-objc/archive/9b8ba849b0f58fe207ecd6ab7c147af55b17556e.tar.gz -> zig_objc-1220e17e64ef0ef561b3e4b9f3a96a2494285f2ec31c097721bf8c8677ec4415c634.tar.gz https://github.com/mitchellh/libxev/archive/db6a52bafadf00360e675fefa7926e8e6c0e9931.tar.gz -> libxev-12206029de146b685739f69b10a6f08baee86b3d0a5f9a659fa2b2b66c9602078bbf.tar.gz https://deps.files.ghostty.org/ziglyph-b89d43d1e3fb01b6074bc1f7fc980324b04d26a5.tar.gz -> ziglyph-12207831bce7d4abce57b5a98e8f3635811cfefd160bca022eb91fe905d36a02cf25.tar.gz https://github.com/rockorager/libvaxis/archive/6d729a2dc3b934818dffe06d2ba3ce02841ed74b.tar.gz -> vaxis-12200df4ebeaed45de26cb2c9f3b6f3746d8013b604e035dae658f86f586c8c91d2f.tar.gz https://github.com/natecraddock/zf/archive/ed99ca18b02dda052e20ba467e90b623c04690dd.tar.gz -> zf-1220edc3b8d8bedbb50555947987e5e8e2f93871ca3c8e8d4cc8f1377c15b5dd35e8.tar.gz https://github.com/mitchellh/zig-js/archive/d0b8b0a57c52fbc89f9d9fecba75ca29da7dd7d1.tar.gz -> zig_js-12205a66d423259567764fa0fc60c82be35365c21aeb76c5a7dc99698401f4f6fefc.tar.gz https://github.com/mitchellh/mach-glfw/archive/37c2995f31abcf7e8378fba68ddcf4a3faa02de0.tar.gz -> mach_glfw-12206ed982e709e565d536ce930701a8c07edfd2cfdce428683f3f2a601d37696a62.tar.gz https://github.com/mbadolato/iTerm2-Color-Schemes/archive/d6c42066b3045292e0b1154ad84ff22d6863ebf7.tar.gz -> iterm2_themes-12204358b2848ffd993d3425055bff0a5ba9b1b60bead763a6dea0517965d7290a6c.tar.gz https://github.com/vancluever/z2d/archive/4638bb02a9dc41cc2fb811f092811f6a951c752a.tar.gz -> z2d-12201f0d542e7541cf492a001d4d0d0155c92f58212fbcb0d224e95edeba06b5416a.tar.gz
+_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	edo	367e103a74bf77e6a8da7894d999fa3c	toolchain-funcs	14648d8795f7779e11e1bc7cf08b7536	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	f14aba975c94ccaa9f357a27e3b17ffe	linux-info	ea4122ba1d8791a12b78e53f9510a2e3	zig-utils	52d461a2abcfdeb90344b40e902c0f6e	zig	f80fe3fcec92cab551ff46f36f74ca77
+_md5_=32085fa18b9009f21ed61387ba0bf357
