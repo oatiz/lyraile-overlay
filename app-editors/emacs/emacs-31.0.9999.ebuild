@@ -8,7 +8,7 @@ inherit autotools eapi9-pipestatus elisp-common flag-o-matic readme.gentoo-r1 to
 if [[ ${PV##*.} = 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://git.savannah.gnu.org/git/emacs.git"
-	EGIT_BRANCH="scratch/igc"
+	EGIT_BRANCH="feature/igc"
 	EGIT_CHECKOUT_DIR="${WORKDIR}/emacs"
 	S="${EGIT_CHECKOUT_DIR}"
 	SLOT="${PV%%.*}-igc"
